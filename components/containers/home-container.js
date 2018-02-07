@@ -8,6 +8,7 @@ import {
   Text,
   View
 } from 'react-native';
+import { SocialIcon } from 'react-native-elements'
 
 class Home extends React.Component {
   render() {
@@ -22,6 +23,10 @@ class Home extends React.Component {
         <Text style={styles.instructions}>
           Test Test
         </Text>
+        <SocialIcon
+          raised={false}
+          type='gitlab'
+        />
       </View>
     )
   }
