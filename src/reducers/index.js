@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
-import TestRecuder from './test-reducer';
+import TestReducer from './test-reducer';
+import TherapyReducer from './therapy-reducer';
 
 export default combineReducers({
-  TestRecuder,
+  TestReducer,
+  TherapyReducer,
 });

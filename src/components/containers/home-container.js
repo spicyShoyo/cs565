@@ -2,10 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import MenuItem from 'material-ui/MenuItem';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
+
+import NewTherapyPresenter from '../presenters/new-therapy-presenter';
 
 class Home extends React.Component {
   constructor(props) {
@@ -34,6 +36,7 @@ class Home extends React.Component {
             />
             <MenuItem>Therapies</MenuItem>
           </Drawer>
+          <NewTherapyPresenter open={true} />
         </div>
       </MuiThemeProvider>
     )
