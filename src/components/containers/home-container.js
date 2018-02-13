@@ -9,16 +9,27 @@ import AppBar from 'material-ui/AppBar';
 
 import NewTherapyPresenter from '../presenters/new-therapy-presenter';
 
+const styles = {
+  root: {
+    marginLeft: '15%',
+    paddingTop: '2%',
+    paddingLeft: '3%',
+    paddingRight: '3%',
+  },
+};
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      drawerOpen: false,
+      drawerOpen: true,
+      textAlign: "center",
+      verticalAlign: "middle",
     }
   }
 
   toggleDrawer = () => {
-    this.setState({drawerOpen: !this.state.drawerOpen})
+    // this.setState({drawerOpen: !this.state.drawerOpen})
   }
 
   render() {
@@ -29,14 +40,17 @@ class Home extends React.Component {
             title="ArgoPortal"
             onLeftIconButtonClick={this.toggleDrawer}
           />
-          <Drawer open={this.state.drawerOpen}>
+          <Drawer open={this.state.drawerOpen} width={'15%'}>
             <AppBar
               title="ArgoPortal"
               onLeftIconButtonClick={this.toggleDrawer}
             />
             <MenuItem>Therapies</MenuItem>
           </Drawer>
-          <NewTherapyPresenter open={true} />
+          <div style={styles.root}>
+            <NewTherapyPresenter open={true} />
+          </div>
+
         </div>
       </MuiThemeProvider>
     )
