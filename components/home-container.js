@@ -23,10 +23,10 @@ class HomeContainer extends React.Component {
         <Text style={styles.instructions}>
           Test Test
         </Text>
-        {/* <SocialIcon
+        <SocialIcon
           raised={false}
           type='gitlab'
-        /> */}
+        />
       </View>
     )
   }
