@@ -6,51 +6,71 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  StatusBar
 } from 'react-native';
-import { SocialIcon } from 'react-native-elements'
+
+// import { Slider, Button } from 'nachos-ui'
 
 class HomeContainer extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          CS 565
-        </Text>
-        <Text style={styles.instructions}>
-          Final Project
-        </Text>
-        <Text style={styles.instructions}>
-          Test Test
-        </Text>
-        <SocialIcon
-          raised={false}
-          type='gitlab'
-        />
+        <StatusBar barStyle="light-content"/>
+        <View style={styles.header}>
+          <View style={{width: '30%'}}>
+          </View>
+          <View style={{width: '40%', alignItems: 'center'}}>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={{...styles.headerFontStyle, color: '#ee4e22'}}>Out</Text>
+              <Text style={styles.headerFontStyle}>there</Text>
+            </View>
+          </View>
+          <View style={{width: '30%'}}>
+          </View>
+        </View>
+        <View style={styles.body}>
+        </View>
+          
+
+        <View style={styles.footer}>
+          <Text style={{fontFamily: 'Avenir-Black', color: 'white'}}>© Group15 SP18 CS565</Text>
+        </View>
       </View>
     )
   }
 }
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     flex: 1,
-    justifyContent: 'center',
+  },
+  body: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  header: {
+    backgroundColor: '#092e4c',
+    paddingTop: 15,
+    height: 70,
+    flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    justifyContent: 'space-between',
+    elevation: 5
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  headerFontStyle: {
+    fontFamily: 'Avenir-Black',
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 25,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  footer: {
+    height: 25,
+    backgroundColor: '#29a4dd',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
-});
-
+};
 
 function mapStateToProps(state) {
   return {

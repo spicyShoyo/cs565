@@ -16,7 +16,7 @@ const ConnectedRouter = connect()(Router);
 const Scenes = Actions.create(
   <Scene key='root' hideNavBar panHandlers={null}>
     <Scene key='home' title="TestProject">
-      <Scene key='start' component={ HomeContainer } hideNavBar={ 1 }/>
+      <Scene key='start' component={ MapContainer } hideNavBar={ 1 }/>
       {/* <Scene key='start' component={ MapContainer } hideNavBar={ 1 }/> */}
     </Scene>
   </Scene>
