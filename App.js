@@ -1,8 +1,6 @@
 import React from 'react';
 import { Provider, connect } from 'react-redux';
 import { Actions, ActionConst, Router, Scene, Drawer } from 'react-native-router-flux';
-import HomeContainer  from './components/home-container';
-import MapContainer from './components/map-container';
 import store from './store';
 import {
   Platform,
@@ -11,13 +9,26 @@ import {
   View
 } from 'react-native';
 
+import HomeContainer  from './components/home-container';
+import ReviewContainer from './components/review-container';
+import TodayContainer from './components/today-container';
+import MapContainer from './components/map-container';
+
 const ConnectedRouter = connect()(Router);
 
 const Scenes = Actions.create(
   <Scene key='root' hideNavBar panHandlers={null}>
-    <Scene key='home' title="TestProject">
-      <Scene key='start' component={ MapContainer } hideNavBar={ 1 }/>
-      {/* <Scene key='start' component={ MapContainer } hideNavBar={ 1 }/> */}
+    <Scene key='homeScene' title="Outthere">
+      <Scene key='homeContainer' component={ HomeContainer } hideNavBar={ 1 }/>
+    </Scene>
+    <Scene key='reviewScene' title="Review">
+      <Scene key='reviewContainer' component={ ReviewContainer } hideNavBar={ 1 }/>
+    </Scene>
+    <Scene key='todayScene' title="Today">
+      <Scene key='todayContainer' component={ TodayContainer } hideNavBar={ 1 }/>
+    </Scene>
+    <Scene key='mapScene' title="Map">
+      <Scene key='mapContainer' component={ MapContainer } hideNavBar={ 1 }/>
     </Scene>
   </Scene>
 )

@@ -7,35 +7,43 @@ import {
   StyleSheet,
   Text,
   View,
-  StatusBar
+  TouchableOpacity
 } from 'react-native';
 
-// import { Slider, Button } from 'nachos-ui'
+import ToolbarPresenter from './toolbar-presenter';
+import FooterPresenter from './footer-presenter';
 
 class HomeContainer extends React.Component {
+  gotToReview = () => {
+    Actions.reviewScene();
+  }
+
+  goToToday = () => {
+    Actions.todayScene();
+  }
+
+  goToMap = () => {
+    Actions.mapScene();
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar barStyle="light-content"/>
-        <View style={styles.header}>
-          <View style={{width: '30%'}}>
-          </View>
-          <View style={{width: '40%', alignItems: 'center'}}>
-            <View style={{flexDirection: 'row'}}>
-              <Text style={{...styles.headerFontStyle, color: '#ee4e22'}}>Out</Text>
-              <Text style={styles.headerFontStyle}>there</Text>
-            </View>
-          </View>
-          <View style={{width: '30%'}}>
-          </View>
-        </View>
+        <ToolbarPresenter titleLeft="Out" titleRight="there"/>
         <View style={styles.body}>
-        </View>
-          
 
-        <View style={styles.footer}>
-          <Text style={{fontFamily: 'Avenir-Black', color: 'white'}}>© Group15 SP18 CS565</Text>
+          <TouchableOpacity style={styles.button} onPress={this.gotToReview}>
+            <Text> Go To Review </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={this.goToToday} >
+            <Text> Go To Today </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={this.goToMap}>
+            <Text> Go To Map </Text>
+          </TouchableOpacity>
+
         </View>
+        <FooterPresenter/>
       </View>
     )
   }
@@ -49,26 +57,10 @@ const styles = {
     flex: 1,
     alignItems: 'center'
   },
-  header: {
-    backgroundColor: '#092e4c',
-    paddingTop: 15,
-    height: 70,
-    flexDirection: 'row',
+  button: {
     alignItems: 'center',
-    justifyContent: 'space-between',
-    elevation: 5
-  },
-  headerFontStyle: {
-    fontFamily: 'Avenir-Black',
-    fontWeight: 'bold',
-    color: 'white',
-    fontSize: 25,
-  },
-  footer: {
-    height: 25,
-    backgroundColor: '#29a4dd',
-    alignItems: 'center',
-    justifyContent: 'center'
+    backgroundColor: '#DDDDDD',
+    padding: 10
   },
 };
 

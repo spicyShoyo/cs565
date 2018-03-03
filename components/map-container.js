@@ -7,30 +7,23 @@ import {
   StyleSheet,
   Text,
   View,
-  StatusBar
 } from 'react-native';
 import MapView from 'react-native-maps';
 
-// import { Slider, Button } from 'nachos-ui'
+import ToolbarPresenter from './toolbar-presenter';
+import FooterPresenter from './footer-presenter';
 
 class MapContainer extends React.Component {
+  onBack = () => {
+    Actions.pop();
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar barStyle="light-content"/>
-        <View style={styles.header}>
-          <View style={{width: '30%'}}>
-          </View>
-          <View style={{width: '40%', alignItems: 'center'}}>
-            <View style={{flexDirection: 'row'}}>
-              <Text style={{...styles.headerFontStyle, color: '#ee4e22'}}>M</Text>
-              <Text style={styles.headerFontStyle}>ap</Text>
-            </View>
-          </View>
-          <View style={{width: '30%'}}>
-          </View>
-        </View>
+        <ToolbarPresenter titleLeft="M" titleRight="ap" onBack={ this.onBack }/>
         <View style={styles.body}>
+
           <MapView
             initialRegion={{
               longitude: -88.2434,
@@ -50,12 +43,10 @@ class MapContainer extends React.Component {
                 <Text>Callout</Text>
               </MapView.Callout>
             </MapView.Marker>
-
           </MapView>
+
         </View>
-        <View style={styles.footer}>
-          <Text style={{fontFamily: 'Avenir-Black', color: 'white'}}>© Group15 SP18 CS565</Text>
-        </View>
+        <FooterPresenter/>
       </View>
     )
   }
@@ -68,27 +59,6 @@ const styles = {
   body: {
     flex: 1,
     alignItems: 'center'
-  },
-  header: {
-    backgroundColor: '#092e4c',
-    paddingTop: 15,
-    height: 70,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    elevation: 5
-  },
-  headerFontStyle: {
-    fontFamily: 'Avenir-Black',
-    fontWeight: 'bold',
-    color: 'white',
-    fontSize: 25,
-  },
-  footer: {
-    height: 25,
-    backgroundColor: '#29a4dd',
-    alignItems: 'center',
-    justifyContent: 'center'
   },
 };
 
