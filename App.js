@@ -13,6 +13,7 @@ import HomeContainer  from './components/home-container';
 import ReviewContainer from './components/review-container';
 import TodayContainer from './components/today-container';
 import MapContainer from './components/map-container';
+import ActivitiesContainer from './components/activities-container';
 
 const ConnectedRouter = connect()(Router);
 
@@ -26,6 +27,7 @@ const Scenes = Actions.create(
     </Scene>
     <Scene key='todayScene' title="Today">
       <Scene key='todayContainer' component={ TodayContainer } hideNavBar={ 1 }/>
+      <Scene key='activitiesContainer' component={ ActivitiesContainer } hideNavBar={ 1 }/>
     </Scene>
     <Scene key='mapScene' title="Map">
       <Scene key='mapContainer' component={ MapContainer } hideNavBar={ 1 }/>

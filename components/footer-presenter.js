@@ -9,8 +9,6 @@ import {
 
 export default class FooterPresenter extends React.Component {
   render() {
-    console.log(this.props);
-
     return (
       <View style={styles.footer}>
         <Text style={{fontFamily: 'Avenir-Black', color: 'white'}}>© Group15 SP18 CS565</Text>
