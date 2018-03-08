@@ -11,7 +11,8 @@ import {
   Modal,
   TouchableHighlight,
   TouchableWithoutFeedback,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from 'react-native';
 import MapView from 'react-native-maps';
 
@@ -30,6 +31,7 @@ class ActivitiesContainer extends React.Component {
 
   onBack = () => {
     Actions.pop();
+    Actions.pop(); // pop to home
   }
 
   onCardPress = (activityObj) => {
@@ -39,60 +41,76 @@ class ActivitiesContainer extends React.Component {
     })
   }
 
+  renderProgress = () => {
+    return (
+      <View style={{paddingTop: 50, alignItems: 'center',}}>
+        <Text style={{...styles.headerFontStyle, color: 'black'}}>Loading...</Text>
+        <View style={styles.spinner}>
+            <ActivityIndicator size="large" color="black"/>
+        </View>
+      </View>
+    )
+  }
+
+  renderBody = () => {
+    return (
+      <View style={styles.cardContainer}>
+        <ScrollView style={ { marginBottom: 50 } }>
+          <ActivityCardPresenter key={0} index={0} activityObj={{title: 'Squirrels!', duration: '1h', distance: '20min walk'}} onPress={this.onCardPress}/>
+            <Modal animationType="fade" transparent={true} visible={this.state.modalShow}>
+              <View style={{marginTop: 20}}>
+                <TouchableOpacity onPress={() => { this.setState({ modalShow: false }); }} style={{ height: 200 }}/>
+                <View style={styles.modalContainer}>
+                  <MapView
+                    initialRegion={{
+                      longitude: -88.2434,
+                      latitude: 40.1164,
+                      latitudeDelta: 9.22,
+                      longitudeDelta: 4.21,
+                    }}
+                    minZoomLevel={15}
+                    style={{
+                      ...StyleSheet.absoluteFillObject,
+                      height:'40%',
+                    }}
+                  >
+                    <MapView.Marker
+                      renderMarker={() => {}}
+                      key={1}
+                      coordinate={{longitude: -88.2434, latitude: 40.1164}}
+                    >
+                      <MapView.Callout>
+                        <Text>Callout</Text>
+                      </MapView.Callout>
+                    </MapView.Marker>
+                  </MapView>
+                  <View style={{marginTop: '40%', width: '100%', flex: 1}}>
+                    <View style={ chipStyles.body }>
+                      <Text style={ chipStyles.titleText}>Where</Text>
+                      <Text style={ chipStyles.statusText}>Crystal Lake</Text>
+                      <Text style={ chipStyles.titleText}>What</Text>
+                      <Text style={ chipStyles.statusText}>Count the Squirrels</Text>
+                      <Text style={ chipStyles.statusText}>Take a selfie with the lake</Text>
+                    </View>
+                    <TouchableOpacity style={ styles.submitButton } onPress={ this.onSubmit } >
+                      <Text style={ styles.submitText }>Start!</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+            </Modal>
+        </ScrollView>
+      </View>
+    )
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <ToolbarPresenter titleLeft="Act" titleRight="ivities" onBack={ this.onBack }/>
         <View style={styles.body}>
 
-          <View style={styles.cardContainer}>
-            <ScrollView style={ { marginBottom: 50 } }>
-              <ActivityCardPresenter key={0} index={0} activityObj={{title: 'Squirrels!', duration: '1h', distance: '20min walk'}} onPress={this.onCardPress}/>
-                <Modal animationType="fade" transparent={true} visible={this.state.modalShow}>
-                  <View style={{marginTop: 20}}>
-                    <TouchableOpacity onPress={() => { this.setState({ modalShow: false }); }} style={{ height: 200 }}/>
-                    <View style={styles.modalContainer}>
-                      <MapView
-                        initialRegion={{
-                          longitude: -88.2434,
-                          latitude: 40.1164,
-                          latitudeDelta: 9.22,
-                          longitudeDelta: 4.21,
-                        }}
-                        minZoomLevel={15}
-                        style={{
-                          ...StyleSheet.absoluteFillObject,
-                          height:'40%',
-                        }}
-                      >
-                        <MapView.Marker
-                          renderMarker={() => {}}
-                          key={1}
-                          coordinate={{longitude: -88.2434, latitude: 40.1164}}
-                        >
-                          <MapView.Callout>
-                            <Text>Callout</Text>
-                          </MapView.Callout>
-                        </MapView.Marker>
-                      </MapView>
-                      <View style={{marginTop: '40%', width: '100%', flex: 1}}>
-                        <View style={ chipStyles.body }>
-                          <Text style={ chipStyles.titleText}>Where</Text>
-                          <Text style={ chipStyles.statusText}>Crystal Lake</Text>
-                          <Text style={ chipStyles.titleText}>What</Text>
-                          <Text style={ chipStyles.statusText}>Count the Squirrels</Text>
-                          <Text style={ chipStyles.statusText}>Take a selfie with the lake</Text>
-                        </View>
-                        <TouchableOpacity style={ styles.submitButton } onPress={ this.onSubmit } >
-                          <Text style={ styles.submitText }>Start!</Text>
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                  </View>
-                </Modal>
-            </ScrollView>
-          </View>
-
+          { this.props.loadingActivities ? this.renderProgress() : this.renderBody() }
 
         </View>
         <FooterPresenter/>
@@ -136,7 +154,14 @@ const styles = {
     backgroundColor: '#ee4e22',
     alignItems: 'center',
   },
-
+  spinner: {
+    width: '100%',
+    height: '100%',
+    flex: 1,
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   submitButton: {
     alignItems: 'center',
     position: 'absolute',
@@ -201,12 +226,19 @@ const chipStyles = {
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
   },
+
+  headerFontStyle: {
+    fontFamily: 'Avenir-Black',
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 25,
+  },
 };
 
 
 function mapStateToProps(state) {
   return {
-
+    loadingActivities: state.ActivityReducer.loadingActivities,
   };
 }
 

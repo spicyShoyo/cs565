@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import { ActionConst } from 'react-native-router-flux';
 
-import TestReducer  from './test-reducer';
+import ActivityReducer from './activity-reducer'
 
 export default combineReducers({
-  TestReducer,
+  ActivityReducer
 });

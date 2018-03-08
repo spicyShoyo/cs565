@@ -13,10 +13,24 @@ import {
 
 import ToolbarPresenter from './toolbar-presenter';
 import FooterPresenter from './footer-presenter';
+import  * as activityActions from '../actions/activity-action';
 
 class TodayContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      entrySurveyObj: {
+        mood: 50, // how do you feel
+        social: 50, // wanna meet people
+        free: 50, // how much time
+        outside: 50 // more time outside
+      }
+    }
+  }
+
   onSubmit = () => {
     Actions.activitiesContainer();
+    this.props.activityActions.submitEntrySurvey(this.state.entrySurveyObj)
   }
 
   onBack = () => {
@@ -133,7 +147,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToPropos(dispatch) {
   return {
-
+    activityActions: bindActionCreators(activityActions, dispatch)
   };
 }
 
