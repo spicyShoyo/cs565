@@ -1,6 +1,8 @@
 export const SUBMITENTRYSURVEY = 'SUBMITENTRYSURVEY';
 export const LOADINGACTIVITIES = 'LOADINGACTIVITIES';
 export const LOADEDACTIVITIES = 'LOADEDACTIVITIES';
+export const STARTEVENT = 'STARTEVE';
+export const ENDEVENT = 'ENDEVENT';
 
 export function loadingActivities() {
   return {
@@ -19,6 +21,19 @@ export function submitEntrySurvey(entrySurveyObj) {
     dispatch(loadingActivities(entrySurveyObj));
     return setTimeout(() => {
       dispatch(loadedActivities())
-    }, 1000); // just like API, taking time
+    }, 100); // just like API, taking time
+  }
+}
+
+export function startEvent(eventIdx) {
+  return {
+    type: STARTEVENT,
+    eventIdx: eventIdx
+  }
+}
+
+export function endEvent(eventIdx) {
+  return {
+    type: ENDEVENT
   }
 }

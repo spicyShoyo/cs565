@@ -1,4 +1,4 @@
-import { LOADINGACTIVITIES, LOADEDACTIVITIES } from '../actions/activity-action';
+import { LOADINGACTIVITIES, LOADEDACTIVITIES, STARTEVENT, ENDEVENT } from '../actions/activity-action';
 
 const defaultState = {
   entrySurveyObj: {
@@ -7,7 +7,9 @@ const defaultState = {
     free: 50, // how much time
     outside: 50 // more time outside
   },
-  loadingActivities: false
+  loadingActivities: false,
+  eventStarted: false,
+  eventIdx: -1
 }
 
 const loadingActivities = (state, entrySurveyObj) => {
@@ -25,13 +27,32 @@ const loadedActivities = (state) => {
   }
 }
 
+const startEvent = (state, eventIdx) => {
+  return {
+    ...state,
+    eventStarted: true,
+    eventIdx: eventIdx
+  }
+}
+
+const endEvent = (state) => {
+  return {
+    ...state,
+    eventStarted: false,
+  }
+}
+
 export default function (state, action) {
   switch (action.type) {
     case LOADINGACTIVITIES:
       return loadingActivities(state, action.entrySurveyObj);
     case LOADEDACTIVITIES:
       return loadedActivities(state);
+    case STARTEVENT:
+      return startEvent(state, action.eventIdx);
+    case ENDEVENT:
+      return endEvent(state);
     default:
-      return defaultState
+      return defaultState;
   }
 }

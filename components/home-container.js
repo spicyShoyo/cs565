@@ -26,18 +26,37 @@ class HomeContainer extends React.Component {
     Actions.mapScene();
   }
 
+  goToEvent = () => {
+    Actions.eventScene();
+  }
+
+  renderEvent = () => {
+    if (this.props.eventStarted) {
+      return (
+        <TouchableOpacity style={styles.button} onPress={this.goToToday} >
+          <Text> Go To Today </Text>
+        </TouchableOpacity>
+      )
+    } else {
+      return (
+        <TouchableOpacity style={styles.button} onPress={this.goToEvent} >
+          <Text> Go To Event </Text>
+        </TouchableOpacity>
+      )
+
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <ToolbarPresenter titleLeft="Out" titleRight="there"/>
+        <ToolbarPresenter titleLeft="Out" titleRight="There"/>
         <View style={styles.body}>
 
           <TouchableOpacity style={styles.button} onPress={this.gotToReview}>
             <Text> Go To Review </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.goToToday} >
-            <Text> Go To Today </Text>
-          </TouchableOpacity>
+          { this.renderEvent() }
           <TouchableOpacity style={styles.button} onPress={this.goToMap}>
             <Text> Go To Map </Text>
           </TouchableOpacity>
@@ -66,7 +85,8 @@ const styles = {
 
 function mapStateToProps(state) {
   return {
-
+    eventStarted: state.ActivityReducer.eventStarted,
+    eventIdx: state.ActivityReducer.eventIdx,
   };
 }
 

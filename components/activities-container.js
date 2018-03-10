@@ -20,12 +20,14 @@ import ToolbarPresenter from './toolbar-presenter';
 import FooterPresenter from './footer-presenter';
 import ActivityCardPresenter from './activity-card-presenter';
 
+import  * as activityActions from '../actions/activity-action';
+
 class ActivitiesContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        modalShow: false,
-        activityObj: null,
+      modalShow: false,
+      activityObj: null,
     };
   }
 
@@ -52,6 +54,10 @@ class ActivitiesContainer extends React.Component {
     )
   }
 
+  startEvent = (eventIdx) => {
+    this.props.activityActions.startEvent(eventIdx);
+  }
+
   renderBody = () => {
     return (
       <View style={styles.cardContainer}>
@@ -71,6 +77,7 @@ class ActivitiesContainer extends React.Component {
                     minZoomLevel={15}
                     style={{
                       ...StyleSheet.absoluteFillObject,
+                      borderRadius: 10,
                       height:'40%',
                     }}
                   >
@@ -92,7 +99,13 @@ class ActivitiesContainer extends React.Component {
                       <Text style={ chipStyles.statusText}>Count the Squirrels</Text>
                       <Text style={ chipStyles.statusText}>Take a selfie with the lake</Text>
                     </View>
-                    <TouchableOpacity style={ styles.submitButton } onPress={ this.onSubmit } >
+                    <TouchableOpacity style={ styles.submitButton } eventIdx={0} onPress={ () => {
+                      this.startEvent(0);
+                      this.setState({ modalShow: false });
+                      Actions.pop();
+                      Actions.pop();
+                      Actions.eventScene();
+                    } } >
                       <Text style={ styles.submitText }>Start!</Text>
                     </TouchableOpacity>
                   </View>
@@ -245,7 +258,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToPropos(dispatch) {
   return {
-
+    activityActions: bindActionCreators(activityActions, dispatch)
   };
 }
 
