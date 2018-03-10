@@ -49,7 +49,7 @@ export async function getAll() {
       res.push(JSON.parse(val));
     }
   }
-  res.sort(function(a,b){return Date.parse(b.quizDate) - Date.parse(a.quizDate)});
+  res.sort(function(a,b){return Date.parse(b.info.date) - Date.parse(a.info.date)});
   return res;
 }
 

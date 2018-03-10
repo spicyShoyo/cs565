@@ -31,6 +31,7 @@ const exitStage = (state, eventObj) => {
 }
 
 const submitEvent = (state, eventObj) => {
+  eventObj.info.date = Date();
   Storager.store(eventObj);
   return {
     ...state,

@@ -14,9 +14,11 @@ import ToolbarPresenter from './presenters/toolbar-presenter';
 import FooterPresenter from './presenters/footer-presenter';
 
 import { OFFSTAGE } from '../actions/event-action'
+import * as reviewActions from '../actions/review-action'
 
 class HomeContainer extends React.Component {
   gotToReview = () => {
+    this.props.reviewActions.loadEvents();
     Actions.reviewScene();
   }
 
@@ -25,6 +27,7 @@ class HomeContainer extends React.Component {
   }
 
   goToMap = () => {
+    this.props.reviewActions.loadEvents();
     Actions.mapScene();
   }
 
@@ -96,7 +99,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToPropos(dispatch) {
   return {
-
+    reviewActions: bindActionCreators(reviewActions, dispatch)
   };
 }
 

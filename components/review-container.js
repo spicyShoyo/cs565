@@ -24,6 +24,8 @@ class ReviewContainer extends React.Component {
         <View style={styles.body}>
 
           <Text>Review</Text>
+          <Text>{ this.props.events.length }</Text>
+          <Text> { this.props.loading.toString() }</Text>
 
         </View>
         <FooterPresenter/>
@@ -44,7 +46,8 @@ const styles = {
 
 function mapStateToProps(state) {
   return {
-
+    events: state.ReviewReducer.events,
+    loading: state.ReviewReducer.loading,
   };
 }
 
