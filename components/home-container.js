@@ -31,7 +31,7 @@ class HomeContainer extends React.Component {
   }
 
   renderEvent = () => {
-    if (this.props.eventStarted) {
+    if (!this.props.eventStarted) {
       return (
         <TouchableOpacity style={styles.button} onPress={this.goToToday} >
           <Text> Go To Today </Text>

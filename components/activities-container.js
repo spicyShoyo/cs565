@@ -252,6 +252,7 @@ const chipStyles = {
 function mapStateToProps(state) {
   return {
     loadingActivities: state.ActivityReducer.loadingActivities,
+    recommendedActivities: state.ActivityReducer.recommendedActivities,
   };
 }
 

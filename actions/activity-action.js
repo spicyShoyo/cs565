@@ -1,3 +1,5 @@
+import SquirrelsEvent from '../events/squirrels-event';
+
 export const SUBMITENTRYSURVEY = 'SUBMITENTRYSURVEY';
 export const LOADINGACTIVITIES = 'LOADINGACTIVITIES';
 export const LOADEDACTIVITIES = 'LOADEDACTIVITIES';
@@ -13,6 +15,7 @@ export function loadingActivities() {
 export function loadedActivities() {
   return {
     type: LOADEDACTIVITIES,
+    recommendedActivities: recommendedActivities,
   }
 }
 
@@ -20,7 +23,7 @@ export function submitEntrySurvey(entrySurveyObj) {
   return function(dispatch) {
     dispatch(loadingActivities(entrySurveyObj));
     return setTimeout(() => {
-      dispatch(loadedActivities())
+      dispatch(loadedActivities(recommendedActivities))
     }, 100); // just like API, taking time
   }
 }

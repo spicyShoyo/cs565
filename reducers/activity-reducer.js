@@ -9,7 +9,8 @@ const defaultState = {
   },
   loadingActivities: false,
   eventStarted: false,
-  eventIdx: -1
+  eventIdx: -1,
+  recommendedActivities: [],
 }
 
 const loadingActivities = (state, entrySurveyObj) => {
@@ -20,10 +21,11 @@ const loadingActivities = (state, entrySurveyObj) => {
   }
 }
 
-const loadedActivities = (state) => {
+const loadedActivities = (state, recommendedActivities) => {
   return {
     ...state,
-    loadingActivities: false
+    loadingActivities: false,
+    recommendedActivities: recommendedActivities,
   }
 }
 
@@ -47,7 +49,7 @@ export default function (state, action) {
     case LOADINGACTIVITIES:
       return loadingActivities(state, action.entrySurveyObj);
     case LOADEDACTIVITIES:
-      return loadedActivities(state);
+      return loadedActivities(state, action.recommendedActivities);
     case STARTEVENT:
       return startEvent(state, action.eventIdx);
     case ENDEVENT:
