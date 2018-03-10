@@ -10,8 +10,8 @@ import {
 } from 'react-native';
 import MapView from 'react-native-maps';
 
-import ToolbarPresenter from './toolbar-presenter';
-import FooterPresenter from './footer-presenter';
+import ToolbarPresenter from './presenters/toolbar-presenter';
+import FooterPresenter from './presenters/footer-presenter';
 
 class MapContainer extends React.Component {
   onBack = () => {

@@ -10,8 +10,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import ToolbarPresenter from './toolbar-presenter';
-import FooterPresenter from './footer-presenter';
+import ToolbarPresenter from './presenters/toolbar-presenter';
+import FooterPresenter from './presenters/footer-presenter';
 
 import { OFFSTAGE } from '../actions/event-action'
 

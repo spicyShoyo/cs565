@@ -16,10 +16,10 @@ import {
 } from 'react-native';
 import MapView from 'react-native-maps';
 
-import ToolbarPresenter from './toolbar-presenter';
-import FooterPresenter from './footer-presenter';
-import ActivityCardPresenter from './activity-card-presenter';
-import ActivityModalPresenter from './activity-modal-presenter';
+import ToolbarPresenter from './presenters/toolbar-presenter';
+import FooterPresenter from './presenters/footer-presenter';
+import ActivityCardPresenter from './presenters/activity-card-presenter';
+import ActivityModalPresenter from './presenters/activity-modal-presenter';
 
 import  * as activityActions from '../actions/activity-action';
 import  * as eventActions from '../actions/event-action';

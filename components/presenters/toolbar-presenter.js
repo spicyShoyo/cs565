@@ -20,7 +20,7 @@ export default class ToolbarPresenter extends React.Component {
               this.props.onBack ?
               <TouchableOpacity onPress={ () => this.props.onBack && this.props.onBack() }>
                 <Image
-                  source={require('../images/chevron_left.png')}
+                  source={require('../../images/chevron_left.png')}
                   style={{height: 40, width: 40}}
                 />
               </TouchableOpacity> : null

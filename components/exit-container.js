@@ -14,8 +14,8 @@ import {
 import MapView from 'react-native-maps';
 import { OFFSTAGE, ROUTESTAGE, MAINSTAGE } from '../actions/event-action';
 
-import ToolbarPresenter from './toolbar-presenter';
-import FooterPresenter from './footer-presenter';
+import ToolbarPresenter from './presenters/toolbar-presenter';
+import FooterPresenter from './presenters/footer-presenter';
 import  * as activityActions from '../actions/activity-action';
 import  * as eventActions from '../actions/event-action';
 

@@ -9,8 +9,8 @@ import {
   View,
 } from 'react-native';
 
-import ToolbarPresenter from './toolbar-presenter';
-import FooterPresenter from './footer-presenter';
+import ToolbarPresenter from './presenters/toolbar-presenter';
+import FooterPresenter from './presenters/footer-presenter';
 
 class ReviewContainer extends React.Component {
   onBack = () => {
