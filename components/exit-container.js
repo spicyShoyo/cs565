@@ -28,6 +28,7 @@ class EventContainer extends React.Component {
   }
 
   onBack = () => {
+    this.props.eventActions.mainStage(this.props.eventObj)
     Actions.pop();
   }
 
@@ -48,72 +49,32 @@ class EventContainer extends React.Component {
     )
   }
 
-  mainStage = () => {
-    this.props.eventActions.mainStage(this.props.eventObj)
-  }
-
-  exitStage = () => {
-    this.props.eventActions.exitStage(this.props.eventObj);
-    Actions.exitContainer();
-  }
-
-  renderBody = () => {
-    return (
-      <View style={styles.cardContainer}>
-        { this.renderSubtitle("Tracker 1?") }
-        <Slider minimumValue={1} maximumValue={100} step={1} value={50} width={'70%'}/>
-        { this.renderDivider() }
-
-        { this.renderSubtitle("Tracker 2?") }
-        <Slider minimumValue={1} maximumValue={100} step={1} value={50} width={'70%'}/>
-        { this.renderDivider() }
-
-        <TouchableOpacity style={ styles.submitButtonBlue } onPress={ this.exitStage } >
-          <Text style={ styles.submitText }>End!</Text>
-        </TouchableOpacity>
-      </View>
-    )
-  }
-
-  renderModal = () => {
-    return (
-      <View style={styles.cardContainer}>
-        <MapView
-          initialRegion={{
-            longitude: this.props.eventObj.info.longitude,
-            latitude: this.props.eventObj.info.latitude,
-            latitudeDelta: 9.22,
-            longitudeDelta: 4.21,
-          }}
-          minZoomLevel={15}
-          style={ {
-            ...StyleSheet.absoluteFillObject,
-            borderRadius: 10,
-            borderBottomLeftRadius: 0,
-            borderBottomRightRadius: 0,
-            marginLeft: 2,
-            marginBottom: 45,
-          } }
-        >
-        </MapView>
-        <TouchableOpacity style={ styles.submitButtonOrange } eventIdx={0} onPress={ this.mainStage } >
-          <Text style={ styles.submitText }>I'm There!</Text>
-        </TouchableOpacity>
-      </View>
-    )
+  onSubmit = () => {
+    this.props.activityActions.endEvent();
+    this.props.eventActions.submitEvent(this.props.eventObj);
+    Actions.pop()
+    Actions.pop()
   }
 
   render() {
     return (
       <View style={styles.container}>
-        { ((this.props.stage) === OFFSTAGE) ?
-          <ToolbarPresenter titleLeft="Ev" titleRight="ent" onBack={ this.onBack }/>
-          :
-          <ToolbarPresenter titleLeft={this.props.eventObj.info.titleLeft} titleRight={this.props.eventObj.info.titleRight} onBack={ this.onBack }/>
-        }
+        <ToolbarPresenter titleLeft='Exit' titleRight='Survey' onBack={ this.onBack }/>
         <View style={styles.body}>
 
-          { ((this.props.stage) === ROUTESTAGE && (this.state.modalShow)) ? this.renderModal() : this.renderBody() }
+          <View style={styles.cardContainer}>
+            { this.renderSubtitle("Tracker 1?") }
+            <Slider minimumValue={1} maximumValue={100} step={1} value={50} width={'70%'}/>
+            { this.renderDivider() }
+
+            { this.renderSubtitle("Tracker 2?") }
+            <Slider minimumValue={1} maximumValue={100} step={1} value={50} width={'70%'}/>
+            { this.renderDivider() }
+
+            <TouchableOpacity style={ styles.submitButton } onPress={ this.onSubmit } >
+              <Text style={ styles.submitText }>Submit!</Text>
+            </TouchableOpacity>
+          </View>
 
         </View>
         <FooterPresenter/>
@@ -144,18 +105,7 @@ const styles = {
     backgroundColor: '#f0f0f0',
     alignItems: 'center',
   },
-  submitButtonBlue: {
-    alignItems: 'center',
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-    height: 45,
-    paddingTop: 3,
-    backgroundColor: '#092e4c',
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-  },
-  submitButtonOrange: {
+  submitButton: {
     alignItems: 'center',
     position: 'absolute',
     bottom: 0,

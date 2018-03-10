@@ -13,6 +13,8 @@ import {
 import ToolbarPresenter from './toolbar-presenter';
 import FooterPresenter from './footer-presenter';
 
+import { OFFSTAGE } from '../actions/event-action'
+
 class HomeContainer extends React.Component {
   gotToReview = () => {
     Actions.reviewScene();
@@ -31,7 +33,7 @@ class HomeContainer extends React.Component {
   }
 
   renderEvent = () => {
-    if (!this.props.eventStarted) {
+    if (this.props.stage === OFFSTAGE) {
       return (
         <TouchableOpacity style={styles.button} onPress={this.goToToday} >
           <Text> Go To Today </Text>
@@ -86,6 +88,7 @@ const styles = {
 function mapStateToProps(state) {
   return {
     eventStarted: state.ActivityReducer.eventStarted,
+    stage: state.EventReducer.stage,
     eventIdx: state.ActivityReducer.eventIdx,
   };
 }

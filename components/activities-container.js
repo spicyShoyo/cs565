@@ -30,6 +30,7 @@ class ActivitiesContainer extends React.Component {
     this.state = {
       modalShow: false,
       activityInfo: null,
+      activityIndex: 0
     };
   }
 
@@ -42,6 +43,7 @@ class ActivitiesContainer extends React.Component {
     this.setState({
       modalShow: true,
       activityInfo: activityInfo,
+      activityIndex: index,
     })
   }
 
@@ -49,8 +51,8 @@ class ActivitiesContainer extends React.Component {
     this.setState({ modalShow: false });
   }
 
-  onModalSubmit = (index) => {
-    this.startEvent(0);
+  onModalSubmit = () => {
+    this.startEvent(this.state.activityIndex);
     this.setState({ modalShow: false });
     Actions.pop();
     Actions.pop();
@@ -74,7 +76,6 @@ class ActivitiesContainer extends React.Component {
   }
 
   renderBody = () => {
-    console.log(this.props.recommendedActivities)
     return (
       <View style={styles.cardContainer}>
         <ScrollView style={ { marginBottom: 50 } }>
