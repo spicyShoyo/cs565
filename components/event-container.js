@@ -12,10 +12,12 @@ import {
   Modal
 } from 'react-native';
 import MapView from 'react-native-maps';
+import { OFFSTAGE, ROUTESTAGE, MAINSTAGE } from '../actions/event-action';
 
 import ToolbarPresenter from './toolbar-presenter';
 import FooterPresenter from './footer-presenter';
 import  * as activityActions from '../actions/activity-action';
+import  * as eventActions from '../actions/event-action';
 
 class EventContainer extends React.Component {
   constructor(props) {
@@ -47,7 +49,9 @@ class EventContainer extends React.Component {
   }
 
   renderBody = () => {
-
+    return (
+      <Text>main stage</Text>
+    )
   }
 
   renderModal = () => {
@@ -55,8 +59,8 @@ class EventContainer extends React.Component {
       <View style={styles.cardContainer}>
         <MapView
           initialRegion={{
-            longitude: -88.2434,
-            latitude: 40.1164,
+            longitude: this.props.eventObj.info.longitude,
+            latitude: this.props.eventObj.info.latitude,
             latitudeDelta: 9.22,
             longitudeDelta: 4.21,
           }}
@@ -72,11 +76,7 @@ class EventContainer extends React.Component {
         >
         </MapView>
         <TouchableOpacity style={ styles.submitButton } eventIdx={0} onPress={ () => {
-          this.startEvent(0);
-          this.setState({ modalShow: false });
-          Actions.pop();
-          Actions.pop();
-          Actions.eventScene();
+          this.props.eventActions.mainStage()
         } } >
           <Text style={ styles.submitText }>I'm There!</Text>
         </TouchableOpacity>
@@ -87,11 +87,14 @@ class EventContainer extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ToolbarPresenter titleLeft="Ev" titleRight="ent" onBack={ this.onBack }/>
+        { ((this.props.stage) === OFFSTAGE) ?
+          <ToolbarPresenter titleLeft="Ev" titleRight="ent" onBack={ this.onBack }/>
+          :
+          <ToolbarPresenter titleLeft={this.props.eventObj.info.titleLeft} titleRight={this.props.eventObj.info.titleRight} onBack={ this.onBack }/>
+        }
         <View style={styles.body}>
 
-          { this.state.modalShow ? this.renderModal() : this.renderBody() }
-
+          { ((this.props.stage) === ROUTESTAGE && (this.state.modalShow)) ? this.renderModal() : this.renderBody() }
 
         </View>
         <FooterPresenter/>
@@ -148,14 +151,16 @@ const styles = {
 
 function mapStateToProps(state) {
   return {
-
+    stage: state.EventReducer.stage,
+    eventObj: state.EventReducer.eventObj,
   };
 }
 
 
 function mapDispatchToPropos(dispatch) {
   return {
-    activityActions: bindActionCreators(activityActions, dispatch)
+    activityActions: bindActionCreators(activityActions, dispatch),
+    eventActions: bindActionCreators(eventActions, dispatch)
   };
 }
 

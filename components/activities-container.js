@@ -22,6 +22,7 @@ import ActivityCardPresenter from './activity-card-presenter';
 import ActivityModalPresenter from './activity-modal-presenter';
 
 import  * as activityActions from '../actions/activity-action';
+import  * as eventActions from '../actions/event-action';
 
 class ActivitiesContainer extends React.Component {
   constructor(props) {
@@ -69,6 +70,7 @@ class ActivitiesContainer extends React.Component {
 
   startEvent = (eventIdx) => {
     this.props.activityActions.startEvent(eventIdx);
+    this.props.eventActions.routeStage(this.props.recommendedActivities[eventIdx]);
   }
 
   renderBody = () => {
@@ -233,7 +235,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToPropos(dispatch) {
   return {
-    activityActions: bindActionCreators(activityActions, dispatch)
+    activityActions: bindActionCreators(activityActions, dispatch),
+    eventActions: bindActionCreators(eventActions, dispatch)
   };
 }
 
