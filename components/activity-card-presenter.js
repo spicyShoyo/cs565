@@ -10,15 +10,15 @@ import {
 
 export default class ActivityCardPresenter extends React.Component {
   pressed = () => {
-    this.props.onPress(this.props.activityObj);
+    this.props.onPress(this.props.index, this.props.activityInfo);
   }
 
   render() {
     return (
       <View style={ styles.body }>
-        <Text style={ styles.titleText}>{ this.props.activityObj.title }</Text>
-        <Text style={ styles.statusText}>Duration: { this.props.activityObj.duration }</Text>
-        <Text style={ styles.statusText}>Distance: { this.props.activityObj.distance }</Text>
+        <Text style={ styles.titleText}>{ this.props.activityInfo.title }</Text>
+        <Text style={ styles.statusText}>Duration: { this.props.activityInfo.duration }</Text>
+        <Text style={ styles.statusText}>Distance: { this.props.activityInfo.distance }</Text>
         <TouchableOpacity style={ styles.submitButton } onPress={ this.pressed }>
           <Text style={ styles.buttonText }>Details ></Text>
         </TouchableOpacity>

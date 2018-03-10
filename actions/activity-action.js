@@ -12,7 +12,7 @@ export function loadingActivities() {
   }
 }
 
-export function loadedActivities() {
+export function loadedActivities(recommendedActivities) {
   return {
     type: LOADEDACTIVITIES,
     recommendedActivities: recommendedActivities,
@@ -23,7 +23,7 @@ export function submitEntrySurvey(entrySurveyObj) {
   return function(dispatch) {
     dispatch(loadingActivities(entrySurveyObj));
     return setTimeout(() => {
-      dispatch(loadedActivities(recommendedActivities))
+      dispatch(loadedActivities([new SquirrelsEvent(entrySurveyObj)]))
     }, 100); // just like API, taking time
   }
 }

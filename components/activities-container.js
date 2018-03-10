@@ -19,6 +19,7 @@ import MapView from 'react-native-maps';
 import ToolbarPresenter from './toolbar-presenter';
 import FooterPresenter from './footer-presenter';
 import ActivityCardPresenter from './activity-card-presenter';
+import ActivityModalPresenter from './activity-modal-presenter';
 
 import  * as activityActions from '../actions/activity-action';
 
@@ -27,7 +28,7 @@ class ActivitiesContainer extends React.Component {
     super(props);
     this.state = {
       modalShow: false,
-      activityObj: null,
+      activityInfo: null,
     };
   }
 
@@ -36,11 +37,23 @@ class ActivitiesContainer extends React.Component {
     Actions.pop(); // pop to home
   }
 
-  onCardPress = (activityObj) => {
+  onCardPress = (index, activityInfo) => {
     this.setState({
       modalShow: true,
-      activityObj: activityObj,
+      activityInfo: activityInfo,
     })
+  }
+
+  onModalClose = () => {
+    this.setState({ modalShow: false });
+  }
+
+  onModalSubmit = (index) => {
+    this.startEvent(0);
+    this.setState({ modalShow: false });
+    Actions.pop();
+    Actions.pop();
+    Actions.eventScene();
   }
 
   renderProgress = () => {
@@ -59,59 +72,20 @@ class ActivitiesContainer extends React.Component {
   }
 
   renderBody = () => {
+    console.log(this.props.recommendedActivities)
     return (
       <View style={styles.cardContainer}>
         <ScrollView style={ { marginBottom: 50 } }>
-          <ActivityCardPresenter key={0} index={0} activityObj={{title: 'Squirrels!', duration: '1h', distance: '20min walk'}} onPress={this.onCardPress}/>
-            <Modal animationType="fade" transparent={true} visible={this.state.modalShow}>
-              <View style={{marginTop: 20}}>
-                <TouchableOpacity onPress={() => { this.setState({ modalShow: false }); }} style={{ height: 200 }}/>
-                <View style={styles.modalContainer}>
-                  <MapView
-                    initialRegion={{
-                      longitude: -88.2434,
-                      latitude: 40.1164,
-                      latitudeDelta: 9.22,
-                      longitudeDelta: 4.21,
-                    }}
-                    minZoomLevel={15}
-                    style={{
-                      ...StyleSheet.absoluteFillObject,
-                      borderRadius: 10,
-                      height:'40%',
-                    }}
-                  >
-                    <MapView.Marker
-                      renderMarker={() => {}}
-                      key={1}
-                      coordinate={{longitude: -88.2434, latitude: 40.1164}}
-                    >
-                      <MapView.Callout>
-                        <Text>Callout</Text>
-                      </MapView.Callout>
-                    </MapView.Marker>
-                  </MapView>
-                  <View style={{marginTop: '40%', width: '100%', flex: 1}}>
-                    <View style={ chipStyles.body }>
-                      <Text style={ chipStyles.titleText}>Where</Text>
-                      <Text style={ chipStyles.statusText}>Crystal Lake</Text>
-                      <Text style={ chipStyles.titleText}>What</Text>
-                      <Text style={ chipStyles.statusText}>Count the Squirrels</Text>
-                      <Text style={ chipStyles.statusText}>Take a selfie with the lake</Text>
-                    </View>
-                    <TouchableOpacity style={ styles.submitButton } eventIdx={0} onPress={ () => {
-                      this.startEvent(0);
-                      this.setState({ modalShow: false });
-                      Actions.pop();
-                      Actions.pop();
-                      Actions.eventScene();
-                    } } >
-                      <Text style={ styles.submitText }>Start!</Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              </View>
-            </Modal>
+          {this.props.recommendedActivities.map((activityObj, index) => {
+            return (
+              <ActivityCardPresenter
+                key={index}
+                index={index}
+                activityInfo={ activityObj.info }
+                onPress={this.onCardPress}/>
+            )
+          })}
+          <ActivityModalPresenter modalShow={this.state.modalShow} onModalClose={this.onModalClose} onModalSubmit={this.onModalSubmit} activityInfo={this.state.activityInfo}/>
         </ScrollView>
       </View>
     )
