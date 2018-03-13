@@ -12,10 +12,24 @@ import MapView from 'react-native-maps';
 
 import ToolbarPresenter from './presenters/toolbar-presenter';
 import FooterPresenter from './presenters/footer-presenter';
+import EventModalPresenter from './presenters/event-modal-presenter';
 
 class MapContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalShow: false,
+      eventInfo: null,
+      eventIdx: 0
+    };
+  }
+
   onBack = () => {
     Actions.pop();
+  }
+
+  onModalClose = () => {
+    this.setState({ modalShow: false });
   }
 
   render() {
@@ -38,13 +52,14 @@ class MapContainer extends React.Component {
               renderMarker={() => {}}
               key={1}
               coordinate={{longitude: -88.2434, latitude: 40.1164}}
+              onPress={()=>{this.setState({modalShow: true})}}
             >
-              <MapView.Callout>
+              {/* <MapView.Callout>
                 <Text>Callout</Text>
-              </MapView.Callout>
+              </MapView.Callout> */}
             </MapView.Marker>
           </MapView>
-
+          <EventModalPresenter modalShow={this.state.modalShow} onModalClose={this.onModalClose} eventInfo={{}}/>
         </View>
         <FooterPresenter/>
       </View>

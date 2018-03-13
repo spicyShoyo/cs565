@@ -9,10 +9,12 @@ import {
   View,
   TouchableOpacity,
   Slider,
+  ScrollView
 } from 'react-native';
 
 import ToolbarPresenter from './presenters/toolbar-presenter';
 import FooterPresenter from './presenters/footer-presenter';
+import SliderPresenter from './presenters/slider-presenter';
 import  * as activityActions from '../actions/activity-action';
 
 class TodayContainer extends React.Component {
@@ -63,23 +65,12 @@ class TodayContainer extends React.Component {
           <View style={styles.cardContainer}>
             <Text style={ {...styles.subSubTitleText, fontSize:30} }> {"Qucik Questions..."} </Text>
             { this.renderDivider('90%') }
-
-            { this.renderSubtitle("How do you feel?") }
-            <Slider minimumValue={1} maximumValue={100} step={1} value={50} width={'70%'}/>
-            { this.renderDivider() }
-
-            { this.renderSubtitle("Wanna meet people?") }
-            <Slider minimumValue={1} maximumValue={100} step={1} value={50} width={'70%'}/>
-            { this.renderDivider() }
-
-            { this.renderSubtitle("How much time?") }
-            <Slider minimumValue={1} maximumValue={100} step={1} value={50} width={'70%'}/>
-            { this.renderDivider() }
-
-            { this.renderSubtitle("More time outside?") }
-            <Slider minimumValue={1} maximumValue={100} step={1} value={50} width={'70%'}/>
-            { this.renderDivider() }
-
+            <ScrollView contentContainer= { { alignItems: 'center' } } style={ { marginBottom: 50, width: '100%' } }>
+              <SliderPresenter title="Feel good?"/>
+              <SliderPresenter title="Wanna meet people?"/>
+              <SliderPresenter title="Have much time?"/>
+              <SliderPresenter title="More time outside?"/>
+            </ScrollView>
             <TouchableOpacity style={ styles.submitButton } onPress={ this.onSubmit } >
               <Text style={ styles.submitText }>Submit!</Text>
             </TouchableOpacity>
