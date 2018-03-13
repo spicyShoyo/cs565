@@ -9,13 +9,15 @@ import {
   View,
   TouchableOpacity,
   Slider,
-  Modal
+  Modal,
+  ScrollView
 } from 'react-native';
 import MapView from 'react-native-maps';
 import { OFFSTAGE, ROUTESTAGE, MAINSTAGE } from '../actions/event-action';
 
 import ToolbarPresenter from './presenters/toolbar-presenter';
 import FooterPresenter from './presenters/footer-presenter';
+import SliderPresenter from './presenters/slider-presenter';
 import  * as activityActions from '../actions/activity-action';
 import  * as eventActions from '../actions/event-action';
 
@@ -49,6 +51,24 @@ class EventContainer extends React.Component {
     )
   }
 
+  renderStat = (str1, str2, str3) => {
+    return (
+      <View style={{
+        marginLeft: 5,
+        alignItems: 'center',
+        flexDirection: 'row',
+      }}>
+        <Text style={ { ...styles.subSubTitleText, color:'#092e4c' } }>{str1}</Text>
+        <Text style={ {
+          ...styles.subSubTitleText,
+          fontSize: 30,
+          color: '#ee4e22'
+        } }> {str2} </Text>
+        <Text style={ { ...styles.subSubTitleText, color:'#092e4c' } }>{str3}</Text>
+      </View>
+    )
+  }
+
   onSubmit = () => {
     this.props.activityActions.endEvent();
     this.props.eventActions.submitEvent(this.props.eventObj);
@@ -63,13 +83,17 @@ class EventContainer extends React.Component {
         <View style={styles.body}>
 
           <View style={styles.cardContainer}>
-            { this.renderSubtitle("Tracker 1?") }
-            <Slider minimumValue={1} maximumValue={100} step={1} value={50} width={'70%'}/>
-            { this.renderDivider() }
-
-            { this.renderSubtitle("Tracker 2?") }
-            <Slider minimumValue={1} maximumValue={100} step={1} value={50} width={'70%'}/>
-            { this.renderDivider() }
+            <Text style={ {...styles.subSubTitleText, fontSize:30} }> {"Qucik Questions..."} </Text>
+            { this.renderDivider('90%') }
+            <ScrollView contentContainer= { { alignItems: 'center' } } style={ { marginBottom: 50, width: '100%' } }>
+              <SliderPresenter title="Feel good?"/>
+              { this.renderStat("You walked", "2000", "steps!") }
+              { this.renderDivider() }
+              <SliderPresenter title="Enjoy the event?"/>
+              { this.renderStat("You spent", "1h", "outside!") }
+              { this.renderDivider() }
+              <SliderPresenter title="Event specified (squirrel cute)?"/>
+            </ScrollView>
 
             <TouchableOpacity style={ styles.submitButton } onPress={ this.onSubmit } >
               <Text style={ styles.submitText }>Submit!</Text>
