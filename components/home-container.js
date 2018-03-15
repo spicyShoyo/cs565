@@ -7,7 +7,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  ImageBackground,
 } from 'react-native';
 
 import ToolbarPresenter from './presenters/toolbar-presenter';
@@ -38,14 +39,14 @@ class HomeContainer extends React.Component {
   renderEvent = () => {
     if (this.props.stage === OFFSTAGE) {
       return (
-        <TouchableOpacity style={styles.button} onPress={this.goToToday} >
-          <Text> Go To Today </Text>
+        <TouchableOpacity style={{...styles.button, width: 400, height: 125, marginTop: 100}} onPress={this.goToToday} >
+          <Text style={{...styles.text, marginLeft: 10}}> >> Today </Text>
         </TouchableOpacity>
       )
     } else {
       return (
-        <TouchableOpacity style={styles.button} onPress={this.goToEvent} >
-          <Text> Go To Event </Text>
+        <TouchableOpacity style={{...styles.button, width: 400, height: 100, marginTop: 100}} onPress={this.goToEvent} >
+          <Text style={{...styles.text, marginLeft: 150}}> Event </Text>
         </TouchableOpacity>
       )
 
@@ -56,17 +57,20 @@ class HomeContainer extends React.Component {
     return (
       <View style={styles.container}>
         <ToolbarPresenter titleLeft="Out" titleRight="There"/>
+        <ImageBackground source={require('../images/homeimg1.png')} style={styles.backgroundImage}>
         <View style={styles.body}>
-
-          <TouchableOpacity style={styles.button} onPress={this.gotToReview}>
-            <Text> Go To Review </Text>
-          </TouchableOpacity>
+          <View>
+            <TouchableOpacity style={{...styles.button, width: 400, height: 100}} onPress={this.gotToReview}>
+              <Text style={{...styles.text, marginLeft: 50}}> Review </Text>
+            </TouchableOpacity>
+          </View>
           { this.renderEvent() }
-          <TouchableOpacity style={styles.button} onPress={this.goToMap}>
-            <Text> Go To Map </Text>
+          <TouchableOpacity style={{...styles.button, width: 400, height: 100, marginTop: 80}} onPress={this.goToMap}>
+            <Text style={{...styles.text, marginLeft: 50}}> Map </Text>
           </TouchableOpacity>
 
         </View>
+        </ImageBackground>
         <FooterPresenter/>
       </View>
     )
@@ -82,9 +86,20 @@ const styles = {
     alignItems: 'center'
   },
   button: {
+    // alignItems: 'center',
+    padding: 10,
+    backgroundColor:'transparent'
+  },
+  backgroundImage: {
+    flex: 1,
+    width: '100%',
     alignItems: 'center',
-    backgroundColor: '#DDDDDD',
-    padding: 10
+    paddingTop: 20,
+  },
+  text: {
+    fontFamily: 'AvenirNextCondensed-HeavyItalic',
+    color: 'white',
+    fontSize: 75,
   },
 };
 
