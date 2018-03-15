@@ -21,7 +21,7 @@ export default class SliderPresenter extends React.Component {
   sliding = (newVal) => {
     this.setState({
       sliderValue: newVal,
-      textSize: 15 + 1.5 * newVal / 10,
+      textSize: 20 + 1.75 * newVal / 10,
       text: newVal > 50 ? 'Y' : 'N',
       textColor: newVal > 50 ? '#ee4e22' : '#092e4c',
     });
@@ -34,6 +34,8 @@ export default class SliderPresenter extends React.Component {
         flexDirection: 'row',
       }}>
         <Text style={ styles.subSubTitleText }> {str} </Text>
+        <Text style={{color: this.state.textColor, fontWeight: 'bold', fontFamily: 'Avenir-Black', fontSize: this.state.textSize}}>{this.state.text}</Text>
+        <Text style={{fontWeight: 'bold', fontFamily: 'Avenir-Black', fontSize: 37.5}}> </Text>
       </View>
     )
   }
@@ -49,11 +51,6 @@ export default class SliderPresenter extends React.Component {
       <View style={{alignItems: 'center'}}>
         { this.renderSubtitle(this.props.title) }
         <Slider minimumValue={1} maximumValue={100} step={1} value={this.state.sliderValue} onValueChange={this.sliding} width={'70%'}/>
-        <View style={{flexDirection: 'row'}}>
-          <Text style={{color: this.state.textColor, fontWeight: 'bold', fontFamily: 'Avenir-Black', fontSize: this.state.textSize}}>{this.state.text}</Text>
-          <Text style={{fontWeight: 'bold', fontFamily: 'Avenir-Black', fontSize: 30}}> </Text>
-        </View>
-
         { this.renderDivider() }
       </View>
     )

@@ -95,6 +95,12 @@ class EventContainer extends React.Component {
             marginBottom: 45,
           } }
         >
+          <MapView.Marker
+            renderMarker={() => {}}
+            key={1}
+            coordinate={{longitude: this.props.eventObj.info.longitude, latitude: this.props.eventObj.info.latitude}}
+          >
+          </MapView.Marker>
         </MapView>
         <TouchableOpacity style={ styles.submitButtonOrange } eventIdx={0} onPress={ this.mainStage } >
           <Text style={ styles.submitText }>I'm There!</Text>
