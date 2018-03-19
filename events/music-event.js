@@ -5,7 +5,7 @@ const COUNTER = "COUNTER";
 const PHOTO = "PHOTO";
 const TEXT = "TEXT";
 
-export default class PygmalionEvent extends BaseEvent{
+export default class MusicEvent extends BaseEvent{
   constructor(entrySurveyObj) {
     super(entrySurveyObj)
     this.info = {
@@ -24,10 +24,15 @@ export default class PygmalionEvent extends BaseEvent{
         {
           type: TEXT,
           title: "🎷🎸🥁  The band's name:",
+        },
+        {
+          type: TEXT,
+          title: "🎼🎵  The genre:",
         }
       ],
       steps: 1723,
       outside: "116 min",
+      when: "Sep 3, 2018",
     }
   }
 

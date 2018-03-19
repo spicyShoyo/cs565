@@ -14,12 +14,24 @@ import ToolbarPresenter from './presenters/toolbar-presenter';
 import FooterPresenter from './presenters/footer-presenter';
 import EventModalPresenter from './presenters/event-modal-presenter';
 
+import SquirrelsEvent from '../events/squirrels-event';
+import CornEvent from '../events/corn-event';
+import SingleEvent from '../events/single-event';
+import MusicEvent from '../events/music-event';
+
+const eventArr = [
+  new SquirrelsEvent({}),
+  new CornEvent({}),
+  new SingleEvent({}),
+  new MusicEvent({}),
+];
+
 class MapContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modalShow: false,
-      eventInfo: null,
+      eventObj: new SquirrelsEvent({}),
       eventIdx: 0
     };
   }
@@ -40,26 +52,28 @@ class MapContainer extends React.Component {
 
           <MapView
             initialRegion={{
-              longitude: -88.2434,
+              longitude: -88.23,
               latitude: 40.1164,
               latitudeDelta: 9.22,
               longitudeDelta: 4.21,
             }}
-            minZoomLevel={11}
+            minZoomLevel={12}
             style={StyleSheet.absoluteFillObject}
           >
-            <MapView.Marker
-              renderMarker={() => {}}
-              key={1}
-              coordinate={{longitude: -88.2434, latitude: 40.1164}}
-              onPress={()=>{this.setState({modalShow: true})}}
-            >
-              {/* <MapView.Callout>
-                <Text>Callout</Text>
-              </MapView.Callout> */}
-            </MapView.Marker>
+            { eventArr.map((eventObj, index) => {
+              return (
+                <MapView.Marker
+                  renderMarker={() => {}}
+                  key={index}
+                  coordinate={{longitude: eventObj.info.longitude, latitude: eventObj.info.latitude}}
+                  onPress={()=>{this.setState({modalShow: true, eventObj: eventObj})}}
+                >
+                </MapView.Marker>
+              )
+            })}
+
           </MapView>
-          <EventModalPresenter modalShow={this.state.modalShow} onModalClose={this.onModalClose} eventInfo={{}}/>
+          <EventModalPresenter modalShow={this.state.modalShow} onModalClose={this.onModalClose} eventInfo={this.state.eventObj.info}/>
         </View>
         <FooterPresenter/>
       </View>

@@ -7,9 +7,200 @@ import {
   StatusBar,
   TouchableOpacity,
   Modal,
+  ScrollView
 } from 'react-native';
 
+const CORN = "Corn!";
+const MUSIC = "Music Festival!";
+const SINGLE = "Single's Night!";
+const LAKE = "Squirrels!";
+
 export default class EventModalPresenter extends React.Component {
+  renderHighlightLine = (textLeft, textMid, textRight) => {
+    return (
+      <View style={{
+        alignItems: 'center',
+        flexDirection: 'row',
+      }}>
+        <Text style={ chipStyles.statusTextBlue }>{textLeft} </Text>
+        <Text style={ chipStyles.statusTextOrange }>{textMid}</Text>
+        <Text style={ chipStyles.statusTextBlue }> {textRight}</Text>
+      </View>
+    )
+  }
+  renderHighlight = (steps, outside) => {
+    return (
+      <View style={ chipStyles.body }>
+        { this.renderHighlightLine("You walked", steps, "steps.") }
+        { this.renderHighlightLine("You spent", outside, "out there.") }
+      </View>
+    );
+  }
+
+  renderLake = (eventInfo) => {
+    return (
+      <View>
+        <View style={ chipStyles.body }>
+          <View style={{
+            alignItems: 'center',
+            flexDirection: 'row',
+          }}>
+            <Text style={ chipStyles.statusTextBlue }>You met with </Text>
+            <Text style={ chipStyles.statusTextOrange }>5</Text>
+            <Text style={ chipStyles.statusTextBlue }> squirrels! 🐿🐿</Text>
+          </View>
+        </View>
+
+        <View style={ chipStyles.body }>
+          <View style={{
+            alignItems: 'center',
+            flexDirection: 'row',
+          }}>
+            <Text style={ chipStyles.statusTextBlue }>Selfie you took with the lake ⬇</Text>
+          </View>
+        </View>
+
+        <View style={ {
+          ...chipStyles.body,
+          backgroundColor: '#29a4dd',
+          height: 300,
+          width: 325,
+          alignItems: 'center',
+          justifyContent: 'center'
+        } }>
+          <Text style={ chipStyles.statusTextWhite }>Fake photo</Text>
+        </View>
+      </View>
+    );
+  }
+
+  renderCorn = (eventInfo) => {
+    return (
+      <View>
+        <View style={ chipStyles.body }>
+          <View style={{
+            alignItems: 'center',
+            flexDirection: 'row',
+          }}>
+            <Text style={ chipStyles.statusTextBlue }>You ate </Text>
+            <Text style={ chipStyles.statusTextOrange }>2</Text>
+            <Text style={ chipStyles.statusTextBlue }> corn dogs! 🌽🌽</Text>
+          </View>
+        </View>
+
+        <View style={ chipStyles.body }>
+          <View style={{
+            alignItems: 'center',
+            flexDirection: 'row',
+          }}>
+            <Text style={ chipStyles.statusTextBlue }>The name of the band:</Text>
+          </View>
+        </View>
+
+        <View style={ chipStyles.body }>
+          <View style={{
+            alignItems: 'center',
+            flexDirection: 'row',
+          }}>
+            <Text style={ {...chipStyles.statusTextOrange, fontSize: 60} }>Sweetcorn</Text>
+          </View>
+        </View>
+      </View>
+    );
+  }
+
+  renderSingle = (eventInfo) => {
+    return (
+      <View>
+        <View style={ chipStyles.body }>
+          <View style={{
+            alignItems: 'center',
+            flexDirection: 'row',
+          }}>
+            <Text style={ chipStyles.statusTextBlue }>You drank </Text>
+            <Text style={ chipStyles.statusTextOrange }>martini</Text>
+            <Text style={ chipStyles.statusTextBlue }>!</Text>
+          </View>
+        </View>
+
+        <View style={ chipStyles.body }>
+          <View style={{
+            alignItems: 'center',
+            flexDirection: 'row',
+          }}>
+            <Text style={ chipStyles.statusTextBlue }>You talked to:</Text>
+          </View>
+        </View>
+
+        <View style={ chipStyles.body }>
+          <View style={{
+            alignItems: 'center',
+            flexDirection: 'row',
+          }}>
+            <Text style={ {...chipStyles.statusTextOrange, fontSize: 60} }>Alex</Text>
+          </View>
+        </View>
+      </View>
+    );
+  }
+
+  renderMusic = (eventInfo) => {
+    return (
+      <View>
+        <View style={ chipStyles.body }>
+          <View style={{
+            alignItems: 'center',
+            flexDirection: 'row',
+          }}>
+            <Text style={ chipStyles.statusTextBlue }>You listend to:</Text>
+          </View>
+        </View>
+
+        <View style={ chipStyles.body }>
+          <View style={{
+            alignItems: 'center',
+            flexDirection: 'row',
+          }}>
+            <Text style={ {...chipStyles.statusTextOrange, fontSize: 60} }>Sweetcorn</Text>
+          </View>
+        </View>
+
+        <View style={ chipStyles.body }>
+          <View style={{
+            alignItems: 'center',
+            flexDirection: 'row',
+          }}>
+            <Text style={ chipStyles.statusTextBlue }>The genre:</Text>
+          </View>
+        </View>
+
+        <View style={ chipStyles.body }>
+          <View style={{
+            alignItems: 'center',
+            flexDirection: 'row',
+          }}>
+            <Text style={ {...chipStyles.statusTextOrange, fontSize: 60} }>Metal</Text>
+          </View>
+        </View>
+      </View>
+    );
+  }
+
+  renderEvent = (eventInfo) => {
+    switch (eventInfo.title) {
+      case CORN:
+        return this.renderCorn(eventInfo);
+      case MUSIC:
+        return this.renderMusic(eventInfo);
+      case SINGLE:
+        return this.renderSingle(eventInfo);
+      case LAKE:
+        return this.renderLake(eventInfo);
+      default:
+        return this.renderLake(eventInfo);
+    }
+  }
+
   render() {
     if (this.props.eventInfo) {
       return (
@@ -18,8 +209,11 @@ export default class EventModalPresenter extends React.Component {
             <View style={{marginTop: 20}}>
               <TouchableOpacity onPress={ this.props.onModalClose } style={{ height: 200 }}/>
               <View style={styles.modalContainer}>
-                <View style={{marginTop: '40%', width: '100%', flex: 1}}>
-                  {/* <View style={ chipStyles.body }>
+                <ScrollView style={{marginLeft: 10, width: '100%', flex: 1}}>
+                  <View style={ chipStyles.body }>
+                    <Text style={ chipStyles.statusTextOrange }>{ this.props.eventInfo.title }</Text>
+                  </View>
+                  <View style={ chipStyles.body }>
                     <Text style={ chipStyles.titleText}>Where</Text>
                     <Text style={ chipStyles.statusText}>{ this.props.eventInfo.where }</Text>
                     <Text style={ chipStyles.titleText}>What</Text>
@@ -28,11 +222,12 @@ export default class EventModalPresenter extends React.Component {
                           <Text key={index} style={chipStyles.statusText}>{item}</Text>
                         )
                       }) }
-                  </View> */}
-                  {/* <TouchableOpacity style={ styles.submitButton } eventIdx={0} onPress={ this.props.onModalSubmit } >
-                    <Text style={ styles.submitText }>Start!</Text>
-                  </TouchableOpacity> */}
-                </View>
+                    <Text style={ chipStyles.titleText}>When</Text>
+                    <Text style={ chipStyles.statusText}>{ this.props.eventInfo.when }</Text>
+                  </View>
+                  { this.renderHighlight(this.props.eventInfo.steps, this.props.eventInfo.outside) }
+                  { this.renderEvent(this.props.eventInfo) }
+                </ScrollView>
               </View>
             </View>
           </Modal>
@@ -110,7 +305,7 @@ const chipStyles = {
     width: 325,
     borderRadius: 10,
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 5,
     marginBottom: 10,
     marginLeft: 10,
     marginRight: 10,
@@ -126,7 +321,7 @@ const chipStyles = {
     fontFamily: 'Avenir-Black',
     color: 'black',
     fontWeight: 'bold',
-    fontSize: 25,
+    fontSize: 20,
   },
 
   statusText: {
@@ -157,5 +352,23 @@ const chipStyles = {
     fontWeight: 'bold',
     color: 'white',
     fontSize: 25,
+  },
+
+  statusTextBlue: {
+    fontFamily: 'Avenir-Black',
+    fontSize: 20,
+    color: '#092e4c'
+  },
+
+  statusTextOrange: {
+    fontFamily: 'Avenir-Black',
+    fontSize: 20,
+    color: '#ee4e22'
+  },
+
+  statusTextWhite: {
+    fontFamily: 'Avenir-Black',
+    fontSize: 25,
+    color: 'white'
   },
 };

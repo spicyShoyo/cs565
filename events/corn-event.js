@@ -34,6 +34,7 @@ export default class CornEvent extends BaseEvent{
       ],
       steps: 4537,
       outside: "79 min",
+      when: "Aug 17, 2018",
     }
   }
 

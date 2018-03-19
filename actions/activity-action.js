@@ -1,7 +1,7 @@
 import SquirrelsEvent from '../events/squirrels-event';
 import CornEvent from '../events/corn-event';
 import SingleEvent from '../events/single-event';
-import PygmalionEvent from '../events/pygmalion-event';
+import MusicEvent from '../events/music-event';
 
 export const SUBMITENTRYSURVEY = 'SUBMITENTRYSURVEY';
 export const LOADINGACTIVITIES = 'LOADINGACTIVITIES';
@@ -30,7 +30,7 @@ export function submitEntrySurvey(entrySurveyObj) {
         new SquirrelsEvent(entrySurveyObj),
         new CornEvent(entrySurveyObj),
         new SingleEvent(entrySurveyObj),
-        new PygmalionEvent(entrySurveyObj),
+        new MusicEvent(entrySurveyObj),
       ]))
     }, 100); // just like API, taking time
   }

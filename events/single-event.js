@@ -33,6 +33,7 @@ export default class SingleEvent extends BaseEvent{
       ],
       steps: 1928,
       outside: "117 min",
+      when: "Nov 12, 2018",
     }
   }
 

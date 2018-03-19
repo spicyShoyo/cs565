@@ -34,6 +34,7 @@ export default class SquirrelsEvent extends BaseEvent{
       ],
       steps: 5728,
       outside: "63 min",
+      when: "May 9, 2018",
     }
   }
 
