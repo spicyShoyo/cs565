@@ -14,6 +14,13 @@ export default class PygmalionEvent extends BaseEvent{
       latitude: 40.108024,
       where: "Krannert Center",
       what: ["Enjoy the music"],
+      exitQuestion: "🎷🎸🥁 Like the music?",
+      trackers: [
+        {
+          type: "TEXT",
+          title: "🎷🎸🥁  The band's name:",
+        }
+      ],
     }
   }
 

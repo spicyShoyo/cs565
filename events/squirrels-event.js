@@ -14,6 +14,19 @@ export default class SquirrelsEvent extends BaseEvent{
       latitude: 40.121888,
       where: "Crystal Lake",
       what: ["Count the Squirrels", "Take a selfie with the lake"],
+      exitQuestion: "🐿🐿 Squirrels cute?",
+      trackers: [
+        {
+          type: "COUNTER",
+          emoji: "🐿",
+          title: "Squirrel!!",
+        },
+
+        {
+          type: "PHOTO",
+          title: "Selfie with the lake",
+        }
+      ],
     }
   }
 

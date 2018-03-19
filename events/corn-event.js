@@ -14,6 +14,19 @@ export default class CornEvent extends BaseEvent{
       latitude: 40.112383,
       where: "Downtown Urbana",
       what: ["Eat corn dogs", "Enjoy live music"],
+      exitQuestion: "🌽🌽 Like the corn dogs?",
+      trackers: [
+        {
+          type: "COUNTER",
+          emoji: "🌽",
+          title: "+1 Corn Dog",
+        },
+
+        {
+          type: "TEXT",
+          title: "The band's name:",
+        }
+      ],
     }
   }
 

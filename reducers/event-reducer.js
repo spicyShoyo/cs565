@@ -32,7 +32,7 @@ const exitStage = (state, eventObj) => {
 
 const submitEvent = (state, eventObj) => {
   eventObj.info.date = Date();
-  Storager.store(eventObj);
+  // Storager.store(eventObj);
   return {
     ...state,
     stage: OFFSTAGE,

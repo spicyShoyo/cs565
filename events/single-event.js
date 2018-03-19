@@ -14,6 +14,18 @@ export default class SingleEvent extends BaseEvent{
       latitude: 40.119937,
       where: "Bentley’s Pub",
       what: ["Order a martini", "Make a friend"],
+      exitQuestion: "🍸🍸 Enjoy the drink?",
+      trackers: [
+        {
+          type: "BINARY",
+          title: "Martini ordered",
+        },
+
+        {
+          type: "TEXT",
+          title: "I talked to:",
+        }
+      ],
     }
   }
 

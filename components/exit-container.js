@@ -92,7 +92,7 @@ class EventContainer extends React.Component {
               <SliderPresenter numerical={false} title="Enjoy the event?"/>
               { this.renderStat("You spent", "1h", "outside!") }
               { this.renderDivider() }
-              <SliderPresenter numerical={false} title="Event specified (squirrel cute)?"/>
+              <SliderPresenter numerical={false} title={this.props.eventObj.info.exitQuestion}/>
             </View>
 
             <TouchableOpacity style={ styles.submitButton } onPress={ this.onSubmit } >

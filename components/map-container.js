@@ -45,7 +45,7 @@ class MapContainer extends React.Component {
               latitudeDelta: 9.22,
               longitudeDelta: 4.21,
             }}
-            minZoomLevel={15}
+            minZoomLevel={11}
             style={StyleSheet.absoluteFillObject}
           >
             <MapView.Marker
