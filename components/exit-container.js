@@ -47,7 +47,7 @@ class EventContainer extends React.Component {
 
   renderDivider = (width='75%') => {
     return (
-      <View style={ { marginTop: 10, marginBottom: 10, borderBottomColor: 'lightgrey', borderBottomWidth: 2, width:width } } />
+      <View style={ { marginTop: 10, borderBottomColor: 'lightgrey', borderBottomWidth: 2, width:width } } />
     )
   }
 
@@ -85,7 +85,7 @@ class EventContainer extends React.Component {
           <View style={styles.cardContainer}>
             <Text style={ {...styles.subSubTitleText, fontSize:30} }> {"Qucik Questions..."} </Text>
             { this.renderDivider('90%') }
-            <ScrollView contentContainer= { { alignItems: 'center' } } style={ { marginBottom: 50, width: '100%' } }>
+            <View contentContainer= { { alignItems: 'center' } } style={ { marginBottom: 50, width: '100%' } }>
               <SliderPresenter numerical={false} title="Feel good?"/>
               { this.renderStat("You walked", "2000", "steps!") }
               { this.renderDivider() }
@@ -93,7 +93,7 @@ class EventContainer extends React.Component {
               { this.renderStat("You spent", "1h", "outside!") }
               { this.renderDivider() }
               <SliderPresenter numerical={false} title="Event specified (squirrel cute)?"/>
-            </ScrollView>
+            </View>
 
             <TouchableOpacity style={ styles.submitButton } onPress={ this.onSubmit } >
               <Text style={ styles.submitText }>Submit!</Text>

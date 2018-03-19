@@ -10,8 +10,8 @@ export default class SquirrelsEvent extends BaseEvent{
       titleLeft: "Squ",
       titleRight: "irrels!",
       duration: "1h",
-      longitude: -88.2434,
-      latitude: 40.1164,
+      longitude: -88.213417,
+      latitude: 40.121888,
       where: "Crystal Lake",
       what: ["Count the Squirrels", "Take a selfie with the lake"],
     }

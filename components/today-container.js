@@ -65,12 +65,12 @@ class TodayContainer extends React.Component {
           <View style={styles.cardContainer}>
             <Text style={ {...styles.subSubTitleText, fontSize:30} }> {"Qucik Questions..."} </Text>
             { this.renderDivider('90%') }
-            <ScrollView contentContainer= { { alignItems: 'center' } } style={ { marginBottom: 50, width: '100%' } }>
+            <View contentContainer= { { alignItems: 'center' } } style={ { marginBottom: 50, width: '100%' } }>
               <SliderPresenter numerical={false} title="Feel good?"/>
               <SliderPresenter numerical={false} title="Wanna meet people?"/>
               <SliderPresenter numerical={true} title="How much time?"/>
               <SliderPresenter numerical={false} title="More time outside?"/>
-            </ScrollView>
+            </View>
             <TouchableOpacity style={ styles.submitButton } onPress={ this.onSubmit } >
               <Text style={ styles.submitText }>Submit!</Text>
             </TouchableOpacity>

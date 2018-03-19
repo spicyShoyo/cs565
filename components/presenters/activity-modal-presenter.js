@@ -22,12 +22,12 @@ export default class ActivityModalPresenter extends React.Component {
               <View style={styles.modalContainer}>
                 <MapView
                   initialRegion={{
-                    longitude: -88.2434,
-                    latitude: 40.1164,
+                    longitude: this.props.activityInfo.longitude,
+                    latitude: this.props.activityInfo.latitude,
                     latitudeDelta: 9.22,
                     longitudeDelta: 4.21,
                   }}
-                  minZoomLevel={15}
+                  minZoomLevel={14}
                   style={{
                     ...StyleSheet.absoluteFillObject,
                     borderRadius: 10,
@@ -37,7 +37,7 @@ export default class ActivityModalPresenter extends React.Component {
                   <MapView.Marker
                     renderMarker={() => {}}
                     key={1}
-                    coordinate={{longitude: -88.2434, latitude: 40.1164}}
+                    coordinate={{longitude: this.props.activityInfo.longitude, latitude: this.props.activityInfo.latitude}}
                   >
                     <MapView.Callout>
                       <Text>Callout</Text>
