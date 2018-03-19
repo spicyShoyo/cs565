@@ -59,7 +59,6 @@ export default class SliderPresenter extends React.Component {
         <Text style={{color: this.state.textColor, fontWeight: 'bold', fontFamily: 'Avenir-Black', fontSize: this.state.textSize}}>{this.state.numerical}</Text>
         <Text style={{fontWeight: 'bold', fontFamily: 'Avenir-Black', fontSize: 25}}> min</Text>
         <Text style={{fontWeight: 'bold', fontFamily: 'Avenir-Black', fontSize: 37.5}}> </Text>
-
       </View>
     )
   }

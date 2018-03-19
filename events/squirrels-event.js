@@ -19,7 +19,7 @@ export default class SquirrelsEvent extends BaseEvent{
         {
           type: "COUNTER",
           emoji: "🐿",
-          title: "Squirrel!!",
+          title: "Squirrel!",
         },
 
         {

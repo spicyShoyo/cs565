@@ -5,10 +5,11 @@ import {
   Text,
   View,
   StatusBar,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput
 } from 'react-native';
 
-export default class PhotoTrackerPresenter extends React.Component {
+export default class TextTrackerPresenter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,18 +23,17 @@ export default class PhotoTrackerPresenter extends React.Component {
 
   render() {
     return (
-      <TouchableOpacity onPress={this.onPress}>
-        { this.state.done ?
-          <View style={styles.footer}>
-            <Text style={styles.text}>Fake Photo</Text>
-          </View>
-          :
-          <View style={styles.footer}>
-            <Text style={styles.text}>➕ {this.props.title}</Text>
-          </View>
-        }
+      <View style={{marginTop: 50}}>
+        <View style={{marginRight: 100}}>
+          <Text style={{...styles.text, fontSize: 30}}>{this.props.title} </Text>
+        </View>
+        {/* <View style={{alignItems: 'center'}}>
+          <Text style={{...styles.text, color: '#ee4e22', fontSize: 75}}>Alex</Text>
+        </View> */}
+        <TextInput multiline={true} autoFocus={true} style={{...styles.text, color: '#ee4e22', fontSize: 75}}/>
 
-      </TouchableOpacity>
+
+      </View>
     )
   }
 }
@@ -56,7 +56,7 @@ const styles = {
   },
   text: {
     fontFamily: 'Avenir-Black',
-    color: 'white',
+    color: '#092e4c',
     fontSize: 25,
   },
 };

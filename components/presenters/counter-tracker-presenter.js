@@ -9,23 +9,31 @@ import {
 
 import ButtonPresenter from './button-presenter';
 
-export default class BinaryTrackerPresenter extends React.Component {
+export default class CounterTrackerPresenter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      done: false,
-      checked: " ",
+      counter: 0,
     }
   }
 
   onPress = () => {
-    this.setState({ done: true, checked: " ✔" });
+    if (this.state.counter < 8) {
+      this.setState({ counter: this.state.counter + 1 });
+    }
   }
 
   render() {
     return (
       <View style={styles.body}>
-        <ButtonPresenter {...styles.buttonStyle} title={this.props.title + this.state.checked} onPress={this.onPress}/>
+        <View style={{
+          alignItems: 'center',
+          flexDirection: 'row',
+        }}>
+          <Text style={{fontSize: 30}}> </Text>
+          <Text style={{fontSize: 30}}>{this.props.emoji.repeat(this.state.counter)}</Text>
+        </View>
+        <ButtonPresenter {...styles.buttonStyle} title={this.props.title} onPress={this.onPress}/>
       </View>
     )
   }
@@ -33,8 +41,8 @@ export default class BinaryTrackerPresenter extends React.Component {
 
 const styles = {
   body: {
-    marginTop: 20,
-    marginBottom: 30
+    marginTop: 10,
+    marginBottom: 30,
   },
   buttonStyle: {
     style: {
