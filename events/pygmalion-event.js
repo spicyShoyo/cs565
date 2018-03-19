@@ -1,5 +1,10 @@
 import BaseEvent from './base-event'
 
+const BINARY = "BINARY";
+const COUNTER = "COUNTER";
+const PHOTO = "PHOTO";
+const TEXT = "TEXT";
+
 export default class PygmalionEvent extends BaseEvent{
   constructor(entrySurveyObj) {
     super(entrySurveyObj)
@@ -17,10 +22,12 @@ export default class PygmalionEvent extends BaseEvent{
       exitQuestion: "🎷🎸🥁 Like the music?",
       trackers: [
         {
-          type: "TEXT",
+          type: TEXT,
           title: "🎷🎸🥁  The band's name:",
         }
       ],
+      steps: 1723,
+      outside: "116 min",
     }
   }
 

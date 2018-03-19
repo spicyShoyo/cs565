@@ -1,5 +1,10 @@
 import BaseEvent from './base-event'
 
+const BINARY = "BINARY";
+const COUNTER = "COUNTER";
+const PHOTO = "PHOTO";
+const TEXT = "TEXT";
+
 export default class SquirrelsEvent extends BaseEvent{
   constructor(entrySurveyObj) {
     super(entrySurveyObj)
@@ -17,16 +22,18 @@ export default class SquirrelsEvent extends BaseEvent{
       exitQuestion: "🐿🐿 Squirrels cute?",
       trackers: [
         {
-          type: "COUNTER",
+          type: COUNTER,
           emoji: "🐿",
           title: "Squirrel!",
         },
 
         {
-          type: "PHOTO",
+          type: PHOTO,
           title: "Selfie with the lake",
         }
       ],
+      steps: 5728,
+      outside: "63 min",
     }
   }
 

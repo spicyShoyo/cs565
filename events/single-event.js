@@ -1,5 +1,10 @@
 import BaseEvent from './base-event'
 
+const BINARY = "BINARY";
+const COUNTER = "COUNTER";
+const PHOTO = "PHOTO";
+const TEXT = "TEXT";
+
 export default class SingleEvent extends BaseEvent{
   constructor(entrySurveyObj) {
     super(entrySurveyObj)
@@ -17,15 +22,17 @@ export default class SingleEvent extends BaseEvent{
       exitQuestion: "🍸🍸 Enjoy the drink?",
       trackers: [
         {
-          type: "BINARY",
+          type: BINARY,
           title: "Martini Ordered",
         },
 
         {
-          type: "TEXT",
+          type: TEXT,
           title: "I talked to:",
         }
       ],
+      steps: 1928,
+      outside: "117 min",
     }
   }
 

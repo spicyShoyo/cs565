@@ -13,11 +13,6 @@ import {
 import ToolbarPresenter from './presenters/toolbar-presenter';
 import FooterPresenter from './presenters/footer-presenter';
 
-import BinaryTrackerPresenter from './presenters/binary-tracker-presenter';
-import PhotoTrackerPresenter from './presenters/photo-tracker-presenter';
-import CounterTrackerPresenter from './presenters/counter-tracker-presenter';
-import TextTrackerPresenter from './presenters/text-tracker-presenter';
-
 class ReviewContainer extends React.Component {
   onBack = () => {
     Actions.pop();
@@ -32,14 +27,10 @@ class ReviewContainer extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ToolbarPresenter titleLeft="Ev" titleRight="ent" onBack={ this.onBack }/>
+        <ToolbarPresenter titleLeft="Re" titleRight="view" onBack={ this.onBack }/>
         <View style={styles.body}>
-        <View style={styles.cardContainer}>
-          <BinaryTrackerPresenter title="Squirrel!"/>
-          <TextTrackerPresenter title="I talked to:"/>
-          <TouchableOpacity style={ styles.submitButtonBlue } onPress={ this.exitStage } >
-            <Text style={ styles.submitText }>End!</Text>
-          </TouchableOpacity>
+          <View style={styles.cardContainer}>
+
           </View>
         </View>
         <FooterPresenter/>

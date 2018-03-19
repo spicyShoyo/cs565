@@ -1,5 +1,10 @@
 import BaseEvent from './base-event'
 
+const BINARY = "BINARY";
+const COUNTER = "COUNTER";
+const PHOTO = "PHOTO";
+const TEXT = "TEXT";
+
 export default class CornEvent extends BaseEvent{
   constructor(entrySurveyObj) {
     super(entrySurveyObj)
@@ -17,16 +22,18 @@ export default class CornEvent extends BaseEvent{
       exitQuestion: "🌽🌽 Like the corn dogs?",
       trackers: [
         {
-          type: "COUNTER",
+          type: COUNTER,
           emoji: "🌽",
           title: "+1 Corn Dog",
         },
 
         {
-          type: "TEXT",
-          title: "The band's name:",
+          type: TEXT,
+          title: "Band's name:",
         }
       ],
+      steps: 4537,
+      outside: "79 min",
     }
   }
 

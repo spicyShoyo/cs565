@@ -12,6 +12,9 @@ export default class BaseEvent {
       where: "Crystal Lake", // Float
       what: ["Count the Squirrels", "Take a selfie with the lake"], // Array[String]
       exitQuestion: "exitQuestion title",
+      trackers: [],
+      steps: 2000,
+      outside: "60 min",
     }
   }
 

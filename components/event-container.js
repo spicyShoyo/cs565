@@ -19,6 +19,16 @@ import FooterPresenter from './presenters/footer-presenter';
 import  * as activityActions from '../actions/activity-action';
 import  * as eventActions from '../actions/event-action';
 
+import BinaryTrackerPresenter from './presenters/binary-tracker-presenter';
+import PhotoTrackerPresenter from './presenters/photo-tracker-presenter';
+import CounterTrackerPresenter from './presenters/counter-tracker-presenter';
+import TextTrackerPresenter from './presenters/text-tracker-presenter';
+
+const BINARY = "BINARY";
+const COUNTER = "COUNTER";
+const PHOTO = "PHOTO";
+const TEXT = "TEXT";
+
 class EventContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -60,13 +70,20 @@ class EventContainer extends React.Component {
   renderBody = () => {
     return (
       <View style={styles.cardContainer}>
-        { this.renderSubtitle("Tracker 1?") }
-        <Slider minimumValue={1} maximumValue={100} step={1} value={50} width={'70%'}/>
-        { this.renderDivider() }
-
-        { this.renderSubtitle("Tracker 2?") }
-        <Slider minimumValue={1} maximumValue={100} step={1} value={50} width={'70%'}/>
-        { this.renderDivider() }
+        { this.props.eventObj.info.trackers.map((tracker, index) => {
+          switch (tracker.type) {
+            case BINARY:
+              return (<BinaryTrackerPresenter key={index} title={tracker.title}/>);
+            case COUNTER:
+              return (<CounterTrackerPresenter key={index} title={tracker.title} emoji={tracker.emoji}/>);
+            case PHOTO:
+              return (<PhotoTrackerPresenter key={index} title={tracker.title}/>);
+            case TEXT:
+              return (<TextTrackerPresenter key={index} title={tracker.title}/>);
+            default:
+              return (<BinaryTrackerPresenter key={index} title={tracker.title}/>);
+          }
+        })}
 
         <TouchableOpacity style={ styles.submitButtonBlue } onPress={ this.exitStage } >
           <Text style={ styles.submitText }>End!</Text>

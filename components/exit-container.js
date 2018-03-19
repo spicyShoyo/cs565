@@ -87,10 +87,10 @@ class EventContainer extends React.Component {
             { this.renderDivider('90%') }
             <View contentContainer= { { alignItems: 'center' } } style={ { marginBottom: 50, width: '100%' } }>
               <SliderPresenter numerical={false} title="Feel good?"/>
-              { this.renderStat("You walked", "2000", "steps!") }
+              { this.renderStat("You walked", this.props.eventObj.info.steps, "steps!") }
               { this.renderDivider() }
               <SliderPresenter numerical={false} title="Enjoy the event?"/>
-              { this.renderStat("You spent", "1h", "outside!") }
+              { this.renderStat("You spent", this.props.eventObj.info.outside, "outside!") }
               { this.renderDivider() }
               <SliderPresenter numerical={false} title={this.props.eventObj.info.exitQuestion}/>
             </View>
