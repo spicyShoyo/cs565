@@ -1,4 +1,7 @@
 import SquirrelsEvent from '../events/squirrels-event';
+import CornEvent from '../events/corn-event';
+import SingleEvent from '../events/single-event';
+import PygmalionEvent from '../events/pygmalion-event';
 
 export const SUBMITENTRYSURVEY = 'SUBMITENTRYSURVEY';
 export const LOADINGACTIVITIES = 'LOADINGACTIVITIES';
@@ -23,7 +26,12 @@ export function submitEntrySurvey(entrySurveyObj) {
   return function(dispatch) {
     dispatch(loadingActivities(entrySurveyObj));
     return setTimeout(() => {
-      dispatch(loadedActivities([new SquirrelsEvent(entrySurveyObj)]))
+      dispatch(loadedActivities([
+        new SquirrelsEvent(entrySurveyObj),
+        new CornEvent(entrySurveyObj),
+        new SingleEvent(entrySurveyObj),
+        new PygmalionEvent(entrySurveyObj),
+      ]))
     }, 100); // just like API, taking time
   }
 }

@@ -78,7 +78,7 @@ class ActivitiesContainer extends React.Component {
   renderBody = () => {
     return (
       <View style={styles.cardContainer}>
-        <ScrollView style={ { marginBottom: 50 } }>
+        <ScrollView style={ { marginBottom: 25 } }>
           {this.props.recommendedActivities.map((activityObj, index) => {
             return (
               <ActivityCardPresenter
