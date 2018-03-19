@@ -1,12 +1,12 @@
-Steps to reproduce this repo:
+Do the following one by one
 
 ```
-react-native init reactNativeMapsExample
-cd reactNativeMapsExample
-rm -rf node_modules
-npm i -S react-native@0.49 #at the moment of creation there was a bug React Native version mismatch
-npm i
-react-native link
+npm install && react-native run-ios
+npm install --save victory-native react-native-svg
+react-native link react-native-svg
 react-native run-ios
 ```
+
+If `Build fails with: library not found for -lRNSVG-tvOS`:
+open ios/reactNativeMapsExample.xcodeproj, remove it from 'Linked Frameworks and Libraries' section.
 

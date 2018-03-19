@@ -17,6 +17,8 @@ import FooterPresenter from './presenters/footer-presenter';
 import { OFFSTAGE } from '../actions/event-action'
 import * as reviewActions from '../actions/review-action'
 
+import { VictoryBar } from "victory-native";
+
 class HomeContainer extends React.Component {
   gotToReview = () => {
     this.props.reviewActions.loadEvents();
