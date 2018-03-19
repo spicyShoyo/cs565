@@ -18,7 +18,7 @@ export default class SingleEvent extends BaseEvent{
       trackers: [
         {
           type: "BINARY",
-          title: "Martini ordered",
+          title: "Martini Ordered",
         },
 
         {
