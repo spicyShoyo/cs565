@@ -1,12 +1,6 @@
-Do the following one by one
+# Group 15 SP18 CS565 @ UIUC
 
+To run:
 ```
 npm install && react-native run-ios
-npm install --save victory-native react-native-svg
-react-native link react-native-svg
-react-native run-ios
 ```
-
-If `Build fails with: library not found for -lRNSVG-tvOS`:
-open ios/reactNativeMapsExample.xcodeproj, remove it from 'Linked Frameworks and Libraries' section.
-
