@@ -86,13 +86,13 @@ class EventContainer extends React.Component {
             <Text style={ {...styles.subSubTitleText, fontSize:30} }> {"Qucik Questions..."} </Text>
             { this.renderDivider('90%') }
             <ScrollView contentContainer= { { alignItems: 'center' } } style={ { marginBottom: 50, width: '100%' } }>
-              <SliderPresenter title="Feel good?"/>
+              <SliderPresenter numerical={false} title="Feel good?"/>
               { this.renderStat("You walked", "2000", "steps!") }
               { this.renderDivider() }
-              <SliderPresenter title="Enjoy the event?"/>
+              <SliderPresenter numerical={false} title="Enjoy the event?"/>
               { this.renderStat("You spent", "1h", "outside!") }
               { this.renderDivider() }
-              <SliderPresenter title="Event specified (squirrel cute)?"/>
+              <SliderPresenter numerical={false} title="Event specified (squirrel cute)?"/>
             </ScrollView>
 
             <TouchableOpacity style={ styles.submitButton } onPress={ this.onSubmit } >

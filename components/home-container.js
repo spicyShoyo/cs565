@@ -9,6 +9,8 @@ import {
   View,
   TouchableOpacity,
   ImageBackground,
+  Animated,
+  Easing
 } from 'react-native';
 
 import ToolbarPresenter from './presenters/toolbar-presenter';
@@ -20,6 +22,27 @@ import * as reviewActions from '../actions/review-action'
 import { VictoryBar } from "victory-native";
 
 class HomeContainer extends React.Component {
+  constructor(props) {
+    super(props)
+    this.animatedValue = new Animated.Value(0)
+  }
+
+  componentDidMount() {
+    this.animate()
+  }
+
+  animate() {
+    this.animatedValue.setValue(0)
+    Animated.timing(
+      this.animatedValue,
+      {
+        toValue: 1,
+        duration: 2000,
+        easing: Easing.linear
+      }
+    ).start(() => this.animate())
+  }
+
   gotToReview = () => {
     this.props.reviewActions.loadEvents();
     Actions.reviewScene();
@@ -39,6 +62,10 @@ class HomeContainer extends React.Component {
   }
 
   renderEvent = () => {
+    const opacity = this.animatedValue.interpolate({
+      inputRange: [0, 0.5, 1],
+      outputRange: [0.4, 1, 0.4]
+    })
     if (this.props.stage === OFFSTAGE) {
       return (
         <TouchableOpacity style={{...styles.button, width: 400, height: 125, marginTop: 100}} onPress={this.goToToday} >
@@ -48,7 +75,12 @@ class HomeContainer extends React.Component {
     } else {
       return (
         <TouchableOpacity style={{...styles.button, width: 400, height: 100, marginTop: 100}} onPress={this.goToEvent} >
-          <Text style={{...styles.text, marginLeft: 150}}> Event </Text>
+          <Animated.View
+          style={{
+            opacity,
+            backgroundColor: 'transparent'}} >
+            <Text style={{...styles.text, marginLeft: 125}}> Event! </Text>
+          </Animated.View>
         </TouchableOpacity>
       )
 

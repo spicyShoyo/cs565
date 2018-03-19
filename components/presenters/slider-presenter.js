@@ -15,15 +15,24 @@ export default class SliderPresenter extends React.Component {
       textSize: 20,
       text: 'Y',
       textColor: '#ee4e22',
+      numerical: 75,
     }
   }
 
   sliding = (newVal) => {
+    let newNumerical = Math.ceil(45 + 0.75 * newVal);
+    let plusSign = '';
+    if (newVal === 100) {
+      plusSign = '+';
+    } else if (newNumerical === 46) {
+      newNumerical = 45; // hacky fix
+    }
     this.setState({
       sliderValue: newVal,
       textSize: 20 + 1.75 * newVal / 10,
       text: newVal > 50 ? 'Y' : 'N',
       textColor: newVal > 50 ? '#ee4e22' : '#092e4c',
+      numerical: newNumerical.toString() + plusSign
     });
   }
 
@@ -40,6 +49,21 @@ export default class SliderPresenter extends React.Component {
     )
   }
 
+  renderSubtitleNumerical = (str) => {
+    return (
+      <View style={{
+        alignItems: 'center',
+        flexDirection: 'row',
+      }}>
+        <Text style={ styles.subSubTitleText }> {str} </Text>
+        <Text style={{color: this.state.textColor, fontWeight: 'bold', fontFamily: 'Avenir-Black', fontSize: this.state.textSize}}>{this.state.numerical}</Text>
+        <Text style={{fontWeight: 'bold', fontFamily: 'Avenir-Black', fontSize: 25}}> min</Text>
+        <Text style={{fontWeight: 'bold', fontFamily: 'Avenir-Black', fontSize: 37.5}}> </Text>
+
+      </View>
+    )
+  }
+
   renderDivider = (width='75%') => {
     return (
       <View style={ { marginTop: 10, marginBottom: 10, borderBottomColor: 'lightgrey', borderBottomWidth: 2, width:width } } />
@@ -49,7 +73,7 @@ export default class SliderPresenter extends React.Component {
   render() {
     return (
       <View style={{alignItems: 'center'}}>
-        { this.renderSubtitle(this.props.title) }
+        { this.props.numerical? this.renderSubtitleNumerical(this.props.title) : this.renderSubtitle(this.props.title) }
         <Slider minimumValue={1} maximumValue={100} step={1} value={this.state.sliderValue} onValueChange={this.sliding} width={'70%'}/>
         { this.renderDivider() }
       </View>

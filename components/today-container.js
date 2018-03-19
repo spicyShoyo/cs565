@@ -52,7 +52,7 @@ class TodayContainer extends React.Component {
 
   renderDivider = (width='75%') => {
     return (
-      <View style={ { marginTop: 10, marginBottom: 10, borderBottomColor: 'lightgrey', borderBottomWidth: 2, width:width } } />
+      <View style={ { marginTop: 10, borderBottomColor: 'lightgrey', borderBottomWidth: 2, width:width } } />
     )
   }
 
@@ -66,10 +66,10 @@ class TodayContainer extends React.Component {
             <Text style={ {...styles.subSubTitleText, fontSize:30} }> {"Qucik Questions..."} </Text>
             { this.renderDivider('90%') }
             <ScrollView contentContainer= { { alignItems: 'center' } } style={ { marginBottom: 50, width: '100%' } }>
-              <SliderPresenter title="Feel good?"/>
-              <SliderPresenter title="Wanna meet people?"/>
-              <SliderPresenter title="Have much time?"/>
-              <SliderPresenter title="More time outside?"/>
+              <SliderPresenter numerical={false} title="Feel good?"/>
+              <SliderPresenter numerical={false} title="Wanna meet people?"/>
+              <SliderPresenter numerical={true} title="How much time?"/>
+              <SliderPresenter numerical={false} title="More time outside?"/>
             </ScrollView>
             <TouchableOpacity style={ styles.submitButton } onPress={ this.onSubmit } >
               <Text style={ styles.submitText }>Submit!</Text>
