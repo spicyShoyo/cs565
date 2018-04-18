@@ -44,6 +44,7 @@ class ReviewContainer extends React.Component {
           <View style={styles.cardContainer}>
             <ScrollView>
               <View style={ chipStyles.body }>
+                <Text style={ {...chipStyles.titleText, fontSize: 20, color: 'darkgrey'} }>Overview</Text>
                 <Text style={ chipStyles.titleText}>Total Events</Text>
                 <Text style={ { ...chipStyles.statusTextOrange, fontSize: 30 }}>32</Text>
                 <Text style={ chipStyles.titleText}>Average Steps</Text>
@@ -55,7 +56,13 @@ class ReviewContainer extends React.Component {
               </View>
 
               <View style={ chipStyles.body }>
-                <Text style={ { ...chipStyles.statusTextBlue, fontSize: 30 }}>Event Types</Text>
+                <Text style={ {...chipStyles.titleText, fontSize: 20, color: 'darkgrey'} }>Event Types</Text>
+                <Text style={ chipStyles.titleText}>You like</Text>
+                <Text style={ { ...chipStyles.statusTextOrange, fontSize: 30 }}>outdoor</Text>
+                <Text style={ chipStyles.titleText}>events more</Text>
+              </View>
+
+              <View style={ chipStyles.body }>
                 <VictoryPie
                   colorScale={["tomato", "orange", "gold"]}
                   labelRadius={70}
@@ -69,8 +76,14 @@ class ReviewContainer extends React.Component {
                 />
               </View>
 
+              <View style={ chipStyles.body }>
+                <Text style={ {...chipStyles.titleText, fontSize: 20, color: 'darkgrey'} }>Mood vs. Time</Text>
+                <Text style={ chipStyles.titleText}>You are</Text>
+                <Text style={ { ...chipStyles.statusTextOrange, fontSize: 30 }}>11%</Text>
+                <Text style={ chipStyles.titleText}>happier after 120 days</Text>
+              </View>
+
               <View style={ {...chipStyles.body, paddingLeft: 15} }>
-                <Text style={ { ...chipStyles.statusTextBlue, fontSize: 30 }}>Mood vs. Event Time</Text>
                 <VictoryChart domainPadding={{y: 50}}>
                   <VictoryStack
                     colorScale={["tomato", "orange"]}
@@ -85,7 +98,7 @@ class ReviewContainer extends React.Component {
                     />
                   </VictoryStack>
                   <VictoryAxis dependentAxis tickFormat={(t) => {return (t > 100 ? '' : t)}}/>
-                  <VictoryAxis label="Event Time (min)"/>
+                  <VictoryAxis label="After using # days"/>
                 </VictoryChart>
                 <VictoryLegend x={125} y={0}
                   height={30}
@@ -100,8 +113,14 @@ class ReviewContainer extends React.Component {
                 />
               </View>
 
+              <View style={ chipStyles.body }>
+                <Text style={ {...chipStyles.titleText, fontSize: 20, color: 'darkgrey'} }>Mood vs. Sociableness</Text>
+                <Text style={ { ...chipStyles.statusTextOrange, fontSize: 30 }}>Socialble</Text>
+                <Text style={ chipStyles.titleText}>events improve your </Text>
+                <Text style={ chipStyles.titleText}>mood the most</Text>
+              </View>
+
               <View style={ {...chipStyles.body, paddingLeft: 15} }>
-                <Text style={ { ...chipStyles.statusTextBlue, fontSize: 30 }}>Mood vs. Sociableness</Text>
                 <VictoryChart labels={["Non-social", "Middle", "Social"]}>
                   <VictoryGroup offset={20}
                     colorScale={"qualitative"}
@@ -110,7 +129,7 @@ class ReviewContainer extends React.Component {
                       data={[{ x: 'Non-social', y: 68 }, { x: 'Middle', y: 73 }, { x: 'Social', y: 80 }]}
                     />
                     <VictoryBar
-                      data={[{ x: 'Non-social', y: 78 }, { x: 'Middle', y: 81 }, { x: 'Social', y: 90 }]}
+                      data={[{ x: 'Non-social', y: 78 }, { x: 'Middle', y: 81 }, { x: 'Social', y: 95 }]}
                     />
                   </VictoryGroup>
                   <VictoryAxis dependentAxis tickFormat={(t) => {return (t > 100 ? '' : t)}}/>
